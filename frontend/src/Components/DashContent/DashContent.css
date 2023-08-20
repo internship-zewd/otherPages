@@ -1,7 +1,4 @@
- .dashContent {
-    padding-top: 30px;
-    /* overflow-y: scroll; */
-}
+ 
 
 .dashContent .title {
     display: flex;

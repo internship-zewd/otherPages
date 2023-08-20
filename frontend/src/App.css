@@ -48,7 +48,7 @@ section {
   display: flex;
 }
 
-nav {
+/* nav {
   position: relative;
   top: 0;
   left: 0;
@@ -150,7 +150,7 @@ nav.close li a .linkName {
 .navLinks li a:hover .linkName {
   color: var(--hover-color);
 }
-
+ */
 .dashboard {
   background-color: var(--panel-color);
   padding: 10px 14px;
@@ -370,7 +370,7 @@ nav.close li a .linkName {
   font-weight: 400;
   color: var(--text-color);
   margin-left: 10px;
-}
+} 
 
 @media (max-width: 1200px) {
   .dashboard .top .searchBox {

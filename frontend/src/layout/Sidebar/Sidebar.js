@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Logo from '../../resource/images/logo.png';
 import './Sidebar.css';
 
@@ -8,73 +8,84 @@ import MenuItem from '../../Components/MenuItem/MenuItem';
 
 
 function Sidebar({sidebarClose}) {
+    const [expand, setExpand] = useState(false);
+   
+
 const menuItems =[
     {
-        name:"Dashboard", to:"/"
+        name:"Dashboard", 
+        iconClassName:"uil uil-estate",
+        to:"/"
     },
     {
         name:"Student", 
-        to:"/student", 
+        to:"/Student", 
+        iconClassName:"uil uil-graduation-cap", 
         subMenus:[
             {
-              name:"Add Student", to:"/student/Add Student"
+              name:"Add Student", to:"/Student/Add Student"
             },
             {
-             name:"All Students", to:"/student/Add Student"
+             name:"All Students", to:"/Student/Add Student"
             }
         ]
     },
     {
         name:"Employee", 
         to:"/Employee", 
+        iconClassName:"uil uil-suitcase",
         subMenus:[
             {
-              name:"Add Student", to:"/student/Add Student"
+              name:"Add Employee", to:"/Employee/Add Employee"
             },
             {
-             name:"Dashboard", to:"/student/Add Student"
+             name:"All Employees", to:"/Employee/All Employees"
             }
         ]
     },
     {
         name:"Course", 
-        to:"/Employee", 
+        to:"/Course", 
+        iconClassName:"uil uil-books",
         subMenus:[
             {
-              name:"Add Student", to:"/student/Add Student"
+              name:"Add Course", to:"/Course/Add Course"
             },
             {
-             name:"Dashboard", to:"/"
+              name:"All Courses", to:"/Course/All Courses"
             }
         ]
     },
     {
         name:"Class", 
-        to:"/Employee", 
+        to:"/Class", 
+        iconClassName:"uil uil-presentation",
         subMenus:[
             {
-              name:"Add Student", to:"/student/Add Student"
+              name:"Add Class", to:"/Class/Add Class"
             },
             {
-             name:"Dashboard", to:"/"
+             name:"All Classes", to:"/Class/All Classes"
             }
         ]
     },
     {
         name:"Project", 
-        to:"/Employee", 
+        to:"/Project", 
+        iconClassName:"uil uil-rocket",
         subMenus:[
             {
-              name:"Add Student", to:"/student/Add Student"
+              name:"Add Project", to:"/Project/Add Project"
             },
             {
-             name:"Dashboard", to:"/"
+              name:"All Projects", to:"/Project/All Projects"
             }
         ]
     },
     {
         name:"Report", 
-        to:"/Employee", 
+        to:"/Report", 
+        iconClassName:"uil uil-receipt-alt",
         subMenus:[
             {
               name:"Add Student", to:"/student/Add Student"
@@ -87,6 +98,7 @@ const menuItems =[
     {
         name:"Message", 
         to:"/Employee", 
+        iconClassName:"uil uil-message",
         subMenus:[
             {
               name:"Add Student", to:"/student/Add Student"
@@ -110,9 +122,19 @@ const menuItems =[
 
             <div className="menuItems" >
                 <ul className="navLinks"  >
-                   <MenuItem
-                   />
-                    {/* <li>
+                   {
+                    menuItems.map((menuItem, index) => (
+                        <MenuItem 
+                        expand={expand}
+                        key={index}
+                        name={menuItem.name}
+                        to={menuItem.to}
+                        subMenus={menuItem.subMenus || []}
+                        iconClassName={menuItem.iconClassName}
+                        />
+                    ))
+                   }
+                     {/* <li>
                         <a href="#"  className="navLink">
                         <i className="uil uil-estate"></i>
                         <span className="linkName">Dashboard</span>
@@ -214,7 +236,7 @@ const menuItems =[
                         
                         <i className="uil uil-message"></i>
                         <span className="linkName">Message</span>
-                    </a></li> */}
+                    </a></li>  */}
                 </ul>
             </div>
 

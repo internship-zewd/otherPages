@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
+import "./MenuItem.css"
+function MenuItem(props, ) {
 
-function MenuItem(props) {
-
-     const {name, subMenus} = props;
+     const {name, subMenus, iconClassName} = props;
+       const [expand, setExpand] = useState(false);
+     
   return (
    <li>
-    <a href="#">              
-        <i className="uil uil-books"></i>
+    <a href="#" onClick={() => setExpand(!expand)} >              
+        <i className={iconClassName}></i>
          <span className="linkName">{name}</span>
              </a>
              {
                 subMenus && subMenus.length > 0 ? ( 
-                         <ul className="submenu">
+                         <ul className={ expand ? 'expanded submenu' : 'submenu' }>
                             {subMenus.map((menu,index) => 
                                  <li key={index}>
                                     <a href="#">

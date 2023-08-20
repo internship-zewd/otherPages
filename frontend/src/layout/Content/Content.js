@@ -1,6 +1,6 @@
 import React from 'react'
 import './Content.css'
-import ContentTop from '../../Components/ContentTop/ContentTop'
+
 import DashContent from '../../Components/DashContent/DashContent'
 
 function Content({click}) {
@@ -8,9 +8,9 @@ function Content({click}) {
    
   
                 
-            <div className="dashContent">
+            
                 <DashContent />
-            </div>
+           
                 
             
         

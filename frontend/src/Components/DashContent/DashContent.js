@@ -2,7 +2,7 @@ import React from 'react'
 
 function DashContent() {
   return (
-    <div>
+   <div className="dashContent">
         <div className="overview">
                     <div className="title">
                         <i className="uil uil-estate"></i>

@@ -1,10 +1,10 @@
 import React from 'react'
 import './ContentTop.css'
-import { useContext } from "react";
+
 
 
 function ContentTop({click}) {
-    // const { toggleSidebar } = useContext(SidebarContext);
+  
   return (
     <div className="top">
                 {/* <button type="button" className="toggler" onClick={() => toggleSidebar() }> */}
