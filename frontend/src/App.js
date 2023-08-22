@@ -5,26 +5,32 @@ import Sidebar from './layout/Sidebar/Sidebar';
 import Content from './layout/Content/Content';
 import ContentTop from './Components/ContentTop/ContentTop';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 function App() {
   const [sidebarClose, setSidebarClose] = useState(false);
   const handleClick= () => {
     setSidebarClose(!sidebarClose);
   }
   return (
-    <div>
-     
-      
        <div className="full_content">
         <section>
-             <Sidebar sidebarClose={sidebarClose}/>
+          
+          
+             <Sidebar sidebarClose={sidebarClose}  click={handleClick}/>
              <section className="dashboard">
-             <ContentTop click={handleClick}/>
-              <Content />
+                <ContentTop click={handleClick}/>
+                 <Content />
               </section>
              
         </section>
     </div>
-    </div>
+    
   )
 }
 

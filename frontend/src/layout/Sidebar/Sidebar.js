@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import Logo from '../../resource/images/logo.png';
 import './Sidebar.css';
@@ -7,9 +7,18 @@ import MenuItem from '../../Components/MenuItem/MenuItem';
 // import { useContext } from 'react';
 
 
-function Sidebar({sidebarClose}) {
+
+function Sidebar({sidebarClose}, {click}) {
     const [expand, setExpand] = useState(false);
-   
+    
+    useEffect(() => {
+
+        if(sidebarClose){
+            document.querySelectorAll('.submenu').forEach(el => {
+                el.classList.remove('expanded')
+            })
+        }
+    })
 
 const menuItems =[
     {
@@ -19,20 +28,20 @@ const menuItems =[
     },
     {
         name:"Student", 
-        to:"/Student", 
+        to:"", 
         iconClassName:"uil uil-graduation-cap", 
         subMenus:[
             {
               name:"Add Student", to:"/Student/Add Student"
             },
             {
-             name:"All Students", to:"/Student/Add Student"
+             name:"All Students", to:"/Student/All Students"
             }
         ]
     },
     {
         name:"Employee", 
-        to:"/Employee", 
+        to:"", 
         iconClassName:"uil uil-suitcase",
         subMenus:[
             {
@@ -45,7 +54,7 @@ const menuItems =[
     },
     {
         name:"Course", 
-        to:"/Course", 
+        to:"", 
         iconClassName:"uil uil-books",
         subMenus:[
             {
@@ -58,7 +67,7 @@ const menuItems =[
     },
     {
         name:"Class", 
-        to:"/Class", 
+        to:"", 
         iconClassName:"uil uil-presentation",
         subMenus:[
             {
@@ -71,7 +80,7 @@ const menuItems =[
     },
     {
         name:"Project", 
-        to:"/Project", 
+        to:"", 
         iconClassName:"uil uil-rocket",
         subMenus:[
             {
@@ -84,27 +93,30 @@ const menuItems =[
     },
     {
         name:"Report", 
-        to:"/Report", 
+        to:"", 
         iconClassName:"uil uil-receipt-alt",
         subMenus:[
             {
-              name:"Add Student", to:"/student/Add Student"
+              name:"Financial Report", to:"/Report/Financial Report"
             },
             {
-             name:"Dashboard", to:"/"
+              name:"Attendance Report", to:"/Report/Attendance Report"
+            },
+            {
+              name:"Student Report Card", to:"/Report/Student Report Card"
             }
         ]
     },
     {
         name:"Message", 
-        to:"/Employee", 
+        to:"", 
         iconClassName:"uil uil-message",
         subMenus:[
             {
-              name:"Add Student", to:"/student/Add Student"
+              name:"New Message", to:"/Message/New Message"
             },
             {
-             name:"Dashboard", to:"/"
+              name:"Archives", to:"/Message/Archives"
             }
         ]
     },
@@ -131,112 +143,13 @@ const menuItems =[
                         to={menuItem.to}
                         subMenus={menuItem.subMenus || []}
                         iconClassName={menuItem.iconClassName}
+                        
+                        
+                        
                         />
                     ))
                    }
-                     {/* <li>
-                        <a href="#"  className="navLink">
-                        <i className="uil uil-estate"></i>
-                        <span className="linkName">Dashboard</span>
-                     
-                    </a></li>
-
-                    <li><a href="#">
-                        
-                        <i className="uil uil-graduation-cap"></i>
-                        <span className="linkName">Student</span>
-                    </a>
-                             <ul className="submenu">
-                                <li>
-                                    <a href="#">
-                                    <span className="sublinkName">Add Student</span>
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href="#">
-                                    <span className="sublinkName">All Students</span>
-                                    </a>
-                                 </li>
-                             </ul>
-                    </li>
-
-                    <li><a href="#">
-                        
-                        <i className="uil uil-suitcase"></i>
-                        <span className="linkName">Employee</span>
-                    </a>
-                            <ul className="submenu">
-                                <li>
-                                    <a href="#">
-                                    <span className="sublinkName">Add Employee</span>
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href="#">
-                                    <span className="sublinkName">All Employees</span>
-                                    </a>
-                                 </li>
-                             </ul>
-                    </li>
-
-                    <MenuItem
-                      name={"Course"}
-                      subMenus={[
-                        {name: "Add Course"},
-                        {name: "All Course"}
-                      ]}
-                     />
-
-                    <li><a href="#">
-                        
-                        <i className="uil uil-presentation"></i>
-                        <span className="linkName">Class</span>
-
-                    </a></li>
-
-                    <li><a href="#">
-                        
-                        <i className="uil uil-rocket"></i>
-                        <span className="linkName">Project</span>
-                    </a>
-                             <ul className="submenu">
-                                <li>
-                                    <a href="#">
-                                    <span className="sublinkName">Add Student</span>
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href="#">
-                                    <span className="sublinkName">All Students</span>
-                                    </a>
-                                 </li>
-                             </ul>
-                    </li>
-
-                    <li><a href="#">
-                        
-                        <i className="uil uil-receipt-alt"></i>
-                        <span className="linkName">Report</span>
-                    </a>
-                     <ul className="submenu">
-                                <li>
-                                    <a href="#">
-                                    <span className="sublinkName">Add Student</span>
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href="#">
-                                    <span className="sublinkName">All Students</span>
-                                    </a>
-                                 </li>
-                             </ul>
-                    </li>
-
-                    <li><a href="#">
-                        
-                        <i className="uil uil-message"></i>
-                        <span className="linkName">Message</span>
-                    </a></li>  */}
+                    
                 </ul>
             </div>
 

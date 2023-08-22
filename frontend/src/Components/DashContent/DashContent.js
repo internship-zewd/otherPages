@@ -1,5 +1,5 @@
 import React from 'react'
-
+// import './DashContent.css'
 function DashContent() {
   return (
    <div className="dashContent">
@@ -10,7 +10,7 @@ function DashContent() {
                     </div>
 
                     <div className="boxes">
-                        <div className="box box1">
+                        <div className="box box-1">
                             <i className="uil uil-graduation-cap"></i>
                             <span className="text">Total Students</span>
                             <span className="number">400</span>

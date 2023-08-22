@@ -58,8 +58,22 @@
     flex-direction: column;
     justify-content: space-between;
     overflow-y: scroll;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+            width: 4px;
+            background-color: inherit;
     
-         
+        }
+    
+        &::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 6px rgba(34, 33, 33, 0.014);
+            border-radius: 18px;
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(34, 33, 33, 0.034);
+            border-radius: 15px;
+        }
 }
 
 .menuItems li {
@@ -92,6 +106,7 @@
     font-weight: 400;
     transition: var(--tran-05);
     color: var(--text-color);
+    cursor: pointer;
 }
 
 .close li a .linkName {
@@ -126,7 +141,7 @@
     position: relative;
     text-decoration: none;
     margin-left: 12px;
-
+    
 }
 .submenu li a .sublinkName {
     font-size: 16px;
@@ -138,6 +153,7 @@
 .close li a .sublinkName {
     opacity: 0;
     pointer-events: none;
+    
 }
 
 .submenu li a:hover i,
@@ -162,11 +178,14 @@
         opacity: 0;
         pointer-events: none;
     }
-        .close li a .sublinkName {
+        .close li a .linkName {
             opacity: 0;
             pointer-events: none;
         }
-
+    .close li a .sublinkName {
+            opacity: 0;
+            pointer-events: none;
+}
     .sideBar li a .linkName {
         opacity: 0;
         pointer-events: none;
