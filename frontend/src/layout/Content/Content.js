@@ -35,10 +35,10 @@ function Content({click}) {
              
                   <Switch>
           
-                   <Route  exact path={'/'}>
+                   <Route exact path={'/'}>
                 <DashContent/>
               </Route>
-              <Route path={'/Student/Add Student'}>
+              <Route  exact path={'/Student/Add Student'}>
                 <AddSt/>
               </Route>
               

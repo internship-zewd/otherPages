@@ -22,7 +22,9 @@
   --boarder-color: #3b484b;
   --hover-color: #e0a708;
   --titleicon-color: #005870;
-
+  --box1-color: #24c8d1e8;
+  --box2-color: #17c5a5c5;
+  --box3-color: #f52c5bd0;
 
   /* TRANSIOTIONS */
   --tran-05: all 0.5s ease;
@@ -371,7 +373,15 @@ nav.close li a .linkName {
   font-weight: 400;
   color: var(--text-color);
   margin-left: 10px;
-}   */ 
+}   
+
+.charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 60px;
+  height: 300px;
+}
 
 @media (max-width: 1200px) {
   .dashboard .top .searchBox {

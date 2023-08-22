@@ -114,6 +114,12 @@
     pointer-events: none;
 }
 
+
+.linkName.active {
+    color: var(--hover-color);
+    
+}
+
 .navLinks li a:hover i,
 .navLinks li a:hover .linkName {
     color: var(--hover-color);
