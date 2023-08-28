@@ -17,6 +17,26 @@ PORT=8081
 const studentRoute=require('./routes/student')
 app.use('/student',studentRoute)
 
+PORT=8081
+const instructorRoute=require('./routes/instructor')
+app.use('/instructor',instructorRoute)
+
+app.get('/get', (req,res)=>{
+    instructor.findAll()
+    .then((instructors)=>{res.json(instructors)
+       
+    console.log(instructors)})
+    .catch((err)=>{
+        if(err){
+            console.log(err);
+
+        } 
+    }); 
+    res.send('get')
+
+})
+
+
 
 
 
