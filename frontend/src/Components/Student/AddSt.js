@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../DashContent/DashContent.css'
 import './Addst.css'
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 function AddSt () {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');

@@ -12,16 +12,51 @@ function AddCo() {
                 </div>
 
 
-                <div className="activity">
-                    <div className="title">
-                        <span className="textActivities">Recent Activities</span>
-                    </div>
+                <div className="container">
 
-                    <div className="activityData">
-                        
+                    <div className="content">
+                        <form >
+                            <div className="user-details">
+                                <div className="input-box">
+                                    <span className="details">Course Name</span>
+                                    <input type="text" name="coursename" placeholder="Enter course name"   />
+                                </div>
+
+                                
+                                <div className="input-box">
+                                    <span className="details">Course ID</span>
+                                    <input type="text" name="courseid"  required maxlength="10"  />
+
+                                </div>
+
+                               <div className="input-box">
+                                    <span className="details">Tuition Fee</span>
+                                    <input type="text" name="tuitionfee"  required  />
+
+                                </div>
+
+                                <div className="input-box">
+                                    <span className="details">Expected Duration in Days</span>
+                                    <input type="text" name="duration"  required maxlength="10"  />
+
+                                </div>
+
+
+                                <button className="btn btn-info btn-block"
+                                    type="submit" 
+
+                                >Submit</button>
+
+                            </div>
+                        </form>
                     </div>
                 </div>
-                </div>
+
+            </div>
+
+
+           
+        
   )
 }
 
