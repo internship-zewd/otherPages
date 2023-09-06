@@ -1,0 +1,224 @@
+import React, { useState } from 'react'
+import '../DashContent/DashContent.css'
+import axios from 'axios';
+import "./AddEm.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import validator from 'validator';
+
+function  AddEm () {
+
+    const [employeeType, setEmployeeType] = useState(null)
+    const [firstName, setFirstName] = useState('');
+    const [middleName, setMiddleName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [salary, setSalary] = useState('');
+    const [date, setDate] = useState('');
+    const [course, setCourse] = useState(null);
+    const [regNum, setRegNum] = useState('');
+    const [errors,setErrors]=useState({});
+    const [password,setPassword]=useState('')
+
+
+    const handleSubmit=async(e)=>{
+        e.preventDefault()
+        const validationErrors={}
+        const regEmail=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        // const regPassword=/[A-Z]/.test(p) && /[0-9]/.test(p) && !/[aeiou]/.test(p) && /^[@#][A-Za-z0-9]{7,13}$/
+        if(employeeType===null){
+            validationErrors.employeeType="Pick the employee type"
+        }
+        if(!firstName.trim()){
+            validationErrors.firstName="Fill in the employee's first name"
+        }else if(firstName.length<3){
+            validationErrors.firstName="Employee's first name is supposed to be atleast 3 characters"
+        }else if(firstName.length>15){
+            validationErrors.firstName="Emplloyee's first name should be less than 16 characters"
+        }
+        if(!middleName.trim()){
+            validationErrors.middleName="Fill in the employee's middle name"
+        }else if(middleName.length<3){
+            validationErrors.middleName="Employee's middle name is supposed to be atleast 3 characters"
+        }else if(middleName.length>15){
+            validationErrors.middleName="Employee's middle name should be less than 16 characters"
+        }
+        if(!lastName.trim()){
+            validationErrors.lastName="Fill in the employee's last name"
+        }else if(lastName.length<3){
+            validationErrors.lastName="Employee's last name is supposed to be atleast 3 characters"
+        }else if(lastName.length>15){
+            validationErrors.lastName="Employee's last name should be less than 16 characters"
+        }
+        if(!email.trim()){
+            validationErrors.email="Fill in employee's email"
+        }else if(!regEmail.test(email)){
+            validationErrors.email="email is not in the correct format"
+        }
+        if(!password.trim()){
+            validationErrors.password="fill in the password of the employee"}
+
+        // else if(!regPassword.test(password)){
+        //     validationErrors.password="Password should contains one Capital letter, should start with special character @ or #"
+        // }
+
+
+        if(!phone.trim()){
+            validationErrors.phone="Fill in employee's phone number"
+        }
+        if(!salary.trim()){
+            validationErrors.salary="Fill in employee's salary"
+        }else if(salary.length>6){
+            validationErrors.salary="salary must not exceed 6 characters."
+        }
+        if(!date.trim()){
+            validationErrors.employmentDate="Fill in employee's employment date"
+        }else if(!validator.isDate(date)){
+            validationErrors="Enter a valid date"
+        }
+        if(course===null){
+            validationErrors.course="Fill in the course the instructor teaches"
+        }
+        if(!regNum.trim()){
+            validationErrors.regNum="Fill in employee's registration number"
+        }else if(regNum.length>8||regNum.length <3){
+            validationErrors.regNum="The registration number should be less than 8 characters and greater than 3 characters"
+
+        }
+        if(!phone.trim()){
+            validationErrors.phone="Fill in employee's phone number"
+        }
+
+        setErrors(validationErrors)
+        if(Object.keys(validationErrors).length===0){
+            alert('Employee Added successfully!')
+        }
+        if(Object.keys(validationErrors).length===0){
+
+        return await axios
+        .post("http://localhost:8081/instructor",{employeeType,firstName,middleName,lastName,email,password,phone,salary,date,course,regNum})
+        .then((res)=>{console.log(res)})
+        .catch((err)=>{
+            if(err){
+                console.log(err)
+            }
+        })}
+        else{
+            alert('try again')
+            console.log(validationErrors)
+        }
+
+    }
+
+
+       
+    return (
+        <div className="dashContent">
+            <div className="overview">
+                <div className="title">
+                    <i className="uil uil-suitcase"></i>
+                    <span className="text">Employee/Add Employee</span>
+                </div>
+                <div className="container">
+                <div className="content">
+                <form onSubmit={handleSubmit}>
+                        <div className="user-details">
+
+                            <div className="input-box">
+                            <div className="gender-details">
+                                    <span className="details">Employee Type</span>
+                                    <select id='employeeType' name='employeeType' value={employeeType} onChange={(e) => { setEmployeeType(e.target.value) }}>
+                                        <option value={null} selected='selected'>select type</option>
+                                        <option value='Admin'>Admin</option>
+                                        <option value='Manager'>Manager</option>
+                                        <option value='Accountant'>Accountant</option>
+                                        <option value='Instructor'>Instructor</option>
+                                    </select>
+                                </div>
+                                <div className="errors">{errors.employeeType}<br/></div>
+                            </div>
+
+                            <div className="input-box">
+                                <span className="details">First Name:</span>
+                                <input type='text' id='firstName' required value={firstName} onChange={(e) => { setFirstName(e.target.value) }} name='firstName' placeholder='First Name of employee' autoComplete='off' /><br />
+                                <div className="errors">{errors.firstName}<br/></div>
+                            </div>
+
+
+                            <div className="input-box">
+                                <span className="details">Middle Name:</span>
+                                <input type='text' id='middleName' required value={middleName} onChange={(e) => { setMiddleName(e.target.value) }} name='middleName' placeholder='Middle Name of employee' autoComplete='off' /><br />
+                                <div className="errors">{errors.middleName}</div>
+                            </div>
+
+                            <div className="input-box">
+                                <span className="details">Last Name:</span>
+                                <input type='text' id='lastName' required value={lastName} onChange={(e) => { setLastName(e.target.value) }} name='lastName' placeholder='Last Name of employee' autoComplete='off' /><br />
+                                <div className="errors">{errors.lastName}</div>
+                            </div>
+
+                            <div className="input-box">
+                                <span className="details">Email:</span>
+                                <input type='email' id='email' required value={email} onChange={(e) => { setEmail(e.target.value) }} name='email' placeholder='Email' autoComplete='off' /><br />
+                                <div className="errors">{errors.email}</div>
+                            </div>
+
+                            <div className="input-box">
+                                <span className="details">Password:</span>
+                                <input type='password' id='password' required value={password} onChange={(e)=>{setPassword(e.target.value )}} name='password' placeholder="Enter employees's password" autoComplete='off'/>
+                                <div className="errors">{errors.password}</div>
+                            </div>
+
+                            <div className="input-box">
+                                <span className="details">Phone:</span>
+                                <input type='tel' id='phone' required value={phone} onChange={(e) => { setPhone(e.target.value) }} name='phone' placeholder='Phone Number' autoComplete='off' /><br />
+                                <div className="errors">{errors.phone}</div>
+                            </div>
+
+
+                            <div className="input-box">
+                                <span className="details">Salary:</span>
+                                <input type='number' id='salary' required value={salary} onChange={(e) => { setSalary(e.target.value) }} name='salary' placeholder='Enter Salary' autoComplete='off' /><br />
+                                <div className="errors">{errors.salary}</div>
+                            </div>
+
+                            <div className="input-box">
+                                <span className="details">Date:</span>
+                                <input type='date' id='date' required value={date} onChange={(e) => { setDate(e.target.value) }} name='date' placeholder='09--------' autoComplete='off' /><br />
+                                <div className="errors">{errors.employmentDate}</div>
+                            </div>
+
+                            <div className="input-box">
+                                <div className="gender-details">
+                                    <span className="details">Course</span>
+                                    <select id='course' name='course' onChange={(e) => { setCourse(e.target.value) }} multiple={true}>
+                                        <option value={null} selected='selected'>select course</option>
+                                        <option value='graphic-design'>Graphic design</option>
+                                        <option value='digital-marketing'>Digital marketing</option>
+                                        <option value='photography'>Photography</option>
+                                        <option value='animation'>Animation and motion design</option>
+                                    </select></div>
+                                    <div className="errors">{errors.course}</div>
+                            </div>
+
+                            <div className='input-box'>
+                                <span className="details">Registration Number</span>
+                                <input type='number' id='regNum' required value={regNum} name='regNum' placeholder='Registration no.' onChange={(e) => { setRegNum(e.target.value) }} autoComplete='off' /><br />
+                                <div className="errors">{errors.regNum}</div>
+                                </div> 
+                              
+                                
+                                <button type='submit' className="btn btn-info btn-block" name='submit' onChange={handleSubmit} >Submit</button>
+                                </div>
+                      
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        </div>
+
+
+)
+    }
+    export default AddEm;
