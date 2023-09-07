@@ -38,9 +38,9 @@ module.exports = (sequelize, DataTypes) => {
 
             },
         },
-        addmitiondate: {
+        admission_date: {
             type: DataTypes.DATEONLY,
-            // allowNull:false,
+            allowNull:false,
             validate: {
                 notEmpty: true
             },

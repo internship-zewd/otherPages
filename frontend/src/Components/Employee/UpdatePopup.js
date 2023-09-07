@@ -59,7 +59,7 @@ const handleSubmit=async(e)=>{
                             <div className="user-details">
                                  <div className="input-box">
                                      <span className="details">Employee Type</span>
-                                      <select id='employeeType' name='employeeType' value={employeeType} onChange={(e) => { setEmployeeType(e.target.value) }}>
+                                      <select id='employeeType' name='employeeType' defaultValue={updateProp.employee_type} onChange={(e) => { setEmployeeType(e.target.value) }}>
                                         <option value='' selected='selected'>select type</option>
                                         <option value='Admin'>Admin</option>
                                         <option value='Manager'>Manager</option>
@@ -71,45 +71,45 @@ const handleSubmit=async(e)=>{
 
                                   <div className="input-box">
                                       <span className="details">First Name:</span>
-                                      <input type='text' id='firstName' required value={firstName} onChange={(e) => { setFirstName(e.target.value) }} name='firstName' placeholder='First Name of employee' autoComplete='off' /><br />
+                                      <input type='text' id='firstName' required defaultValue={updateProp.first_name} onChange={(e) => { setFirstName(e.target.value) }} name='firstName' placeholder='First Name of employee' autoComplete='off' /><br />
                                   </div>
 
 
                                   <div className="input-box">
                                       <span className="details">Middle Name:</span>
-                                      <input type='text' id='middleName' required value={middleName} onChange={(e) => { setMiddleName(e.target.value) }} name='middleName' placeholder='Middle Name of employee' autoComplete='off' /><br />
+                                      <input type='text' id='middleName' required defaultValue={updateProp.middle_name} onChange={(e) => { setMiddleName(e.target.value) }} name='middleName' placeholder='Middle Name of employee' autoComplete='off' /><br />
                                   </div>
 
                                    <div className="input-box">
                                        <span className="details">Last Name:</span>
-                                       <input type='text' id='lastName' required value={lastName} onChange={(e) => { setLastName(e.target.value) }} name='lastName' placeholder='Last Name of employee' autoComplete='off' /><br />
+                                       <input type='text' id='lastName' required defaultValue={updateProp.last_name} onChange={(e) => { setLastName(e.target.value) }} name='lastName' placeholder='Last Name of employee' autoComplete='off' /><br />
                                   </div>
 
                                      <div className="input-box">
                                           <span className="details">Email:</span>
-                                          <input type='email' id='email' required value={email} onChange={(e) => { setEmail(e.target.value) }} name='email' placeholder='Email' autoComplete='off' /><br />
+                                          <input type='email' id='email' required defaultValue={updateProp.email} onChange={(e) => { setEmail(e.target.value) }} name='email' placeholder='Email' autoComplete='off' /><br />
                                      </div>
 
                                        <div className="input-box">
                                             <span className="details">Phone:</span>
-                                            <input type='tel' id='phone' required value={phone} onChange={(e) => { setPhone(e.target.value) }} name='phone' placeholder='Phone Number' autoComplete='off' /><br />
+                                            <input type='tel' id='phone' required defaultValue={updateProp.phone} onChange={(e) => { setPhone(e.target.value) }} name='phone' placeholder='Phone Number' autoComplete='off' /><br />
                                        </div>
 
 
                                        <div className="input-box">
                                            <span className="details">Salary:</span>
-                                           <input type='number' id='salary' required value={salary} onChange={(e) => { setSalary(e.target.value) }} name='salary' placeholder='Enter Salary' autoComplete='off' /><br />
+                                           <input type='number' id='salary' required defaultValue={updateProp.salary} onChange={(e) => { setSalary(e.target.value) }} name='salary' placeholder='Enter Salary' autoComplete='off' /><br />
                                        </div>
 
                                           <div className="input-box">
                                             <span className="details">Date:</span>
-                                            <input type='date' id='date' required value={date} onChange={(e) => { setDate(e.target.value) }} name='date' placeholder='09--------' autoComplete='off' /><br />
+                                            <input type='date' id='date' required defaultValue={updateProp.employment_date} onChange={(e) => { setDate(e.target.value) }} name='date' placeholder='09--------' autoComplete='off' /><br />
                                          </div>
 
                                           <div className="input-box">
                                                    <div className="gender-details">
                                                          <span className="details">Course</span>
-                                                                <select id='course' name='course' onChange={(e) => { setCourse(e.target.value) }} multiple={true}>
+                                                                <select id='course' name='course'defaultValue={updateProp.course} onChange={(e) => { setCourse(e.target.value) }}>
                                                                       <option value='' selected='selected'>select course</option>
                                                                       <option value='graphic-design'>Graphic design</option>
                                                                       <option value='digital-marketing'>Digital marketing</option>
@@ -122,7 +122,7 @@ const handleSubmit=async(e)=>{
 
                                                    <div className='input-box'>
                                                          <span className="details">Registration Number</span>
-                                                         <input type='number' id='regNum' required value={regNum} name='regNum' placeholder='Registration no.' onChange={(e) => { setRegNum(e.target.value) }} autoComplete='off' /><br />
+                                                         <input type='number' id='regNum' required defaultValue={updateProp.registration_number} name='regNum' placeholder='Registration no.' onChange={(e) => { setRegNum(e.target.value) }} autoComplete='off' /><br />
                                                     </div> 
   
     

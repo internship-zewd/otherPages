@@ -127,7 +127,7 @@ function  AddEm () {
                             <div className="input-box">
                             <div className="gender-details">
                                     <span className="details">Employee Type</span>
-                                    <select id='employeeType' name='employeeType' value={employeeType} onChange={(e) => { setEmployeeType(e.target.value) }}>
+                                    <select id='employeeType' name='employeeType' value={employeeType} onChange={(e) => { setEmployeeType(e.target.value) }} required >
                                         <option value={null} selected='selected'>select type</option>
                                         <option value='Admin'>Admin</option>
                                         <option value='Manager'>Manager</option>

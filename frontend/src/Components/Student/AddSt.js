@@ -197,7 +197,7 @@ function AddSt () {
 
                                 <div className="input-box">
                                     <span className="details">Date of Birth</span>
-                                    <input type="date" placeholder="" id="Date" name="dob"  requiredonChange={(e)=>{setDob(e.target.value )}} />
+                                    <input type="date" placeholder="" id="Date" name="dob"  required onChange={(e)=>{setDob(e.target.value )}} />
                                     <div className="errors">{errors.dob}<br/></div>
                                 </div>
 
