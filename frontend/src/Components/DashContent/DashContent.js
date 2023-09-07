@@ -6,6 +6,10 @@ import {
  Legend, ResponsiveContainer, 
  LineChart, Line } 
  from 'recharts';
+ import {useEffect} from 'react'
+ import axios from 'axios';
+
+
 
 function DashContent() {
     const data = [
@@ -52,6 +56,20 @@ function DashContent() {
           amt: 2100,
         },
       ];
+
+      useEffect(()=>{
+        getData()
+        },[])
+      
+        const getData=async(req,res)=>{
+await axios.get(`http://localhost:8081/instructor`)
+.then(console.log(res))
+.catch((err)=>{
+  if(err){
+    console.log(err)
+  }})
+      
+        }
 
   return (
    <div className="dashContent">

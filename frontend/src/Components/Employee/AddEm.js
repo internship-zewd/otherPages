@@ -7,7 +7,7 @@ import validator from 'validator';
 
 function  AddEm () {
 
-    const [employeeType, setEmployeeType] = useState(null)
+    const [employeeType, setEmployeeType] = useState("")
     const [firstName, setFirstName] = useState('');
     const [middleName, setMiddleName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -15,10 +15,11 @@ function  AddEm () {
     const [phone, setPhone] = useState('');
     const [salary, setSalary] = useState('');
     const [date, setDate] = useState('');
-    const [course, setCourse] = useState(null);
+    const [course, setCourse] = useState("");
     const [regNum, setRegNum] = useState('');
     const [errors,setErrors]=useState({});
-    const [password,setPassword]=useState('')
+    const [password,setPassword]=useState('');
+
 
 
     const handleSubmit=async(e)=>{
@@ -26,25 +27,26 @@ function  AddEm () {
         const validationErrors={}
         const regEmail=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         // const regPassword=/[A-Z]/.test(p) && /[0-9]/.test(p) && !/[aeiou]/.test(p) && /^[@#][A-Za-z0-9]{7,13}$/
-        if(employeeType===null){
+        const regName=/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
+        if(!employeeType.trim()){
             validationErrors.employeeType="Pick the employee type"
         }
-        if(!firstName.trim()){
-            validationErrors.firstName="Fill in the employee's first name"
+        if(!regName.test(firstName)){
+            validationErrors.firstName="Employee's first name should consist of only letters"
         }else if(firstName.length<3){
             validationErrors.firstName="Employee's first name is supposed to be atleast 3 characters"
         }else if(firstName.length>15){
             validationErrors.firstName="Emplloyee's first name should be less than 16 characters"
         }
-        if(!middleName.trim()){
-            validationErrors.middleName="Fill in the employee's middle name"
+        if(!regName.test(middleName)){
+            validationErrors.middleName="Employee's middle name should consist of only letter"
         }else if(middleName.length<3){
             validationErrors.middleName="Employee's middle name is supposed to be atleast 3 characters"
         }else if(middleName.length>15){
             validationErrors.middleName="Employee's middle name should be less than 16 characters"
         }
-        if(!lastName.trim()){
-            validationErrors.lastName="Fill in the employee's last name"
+        if(regName.test(lastName)){
+            validationErrors.lastName="Employee's last name should consist of only letter"
         }else if(lastName.length<3){
             validationErrors.lastName="Employee's last name is supposed to be atleast 3 characters"
         }else if(lastName.length>15){
@@ -76,7 +78,7 @@ function  AddEm () {
         }else if(!validator.isDate(date)){
             validationErrors="Enter a valid date"
         }
-        if(course===null){
+        if(!course.trim()){
             validationErrors.course="Fill in the course the instructor teaches"
         }
         if(!regNum.trim()){
@@ -105,7 +107,9 @@ function  AddEm () {
         })}
         else{
             alert('try again')
+
             console.log(validationErrors)
+            console.log(employeeType)
         }
 
     }
@@ -127,8 +131,8 @@ function  AddEm () {
                             <div className="input-box">
                             <div className="gender-details">
                                     <span className="details">Employee Type</span>
-                                    <select id='employeeType' name='employeeType' value={employeeType} onChange={(e) => { setEmployeeType(e.target.value) }} required >
-                                        <option value={null} selected='selected'>select type</option>
+                                    <select id='employeeType' name='employeeType'value={employeeType} onChange={(e) => { setEmployeeType(e.target.value) }} required >
+                                        <option value="" selected="selected">select type</option>
                                         <option value='Admin'>Admin</option>
                                         <option value='Manager'>Manager</option>
                                         <option value='Accountant'>Accountant</option>
@@ -191,8 +195,8 @@ function  AddEm () {
                             <div className="input-box">
                                 <div className="gender-details">
                                     <span className="details">Course</span>
-                                    <select id='course' name='course' onChange={(e) => { setCourse(e.target.value) }} multiple={true}>
-                                        <option value={null} selected='selected'>select course</option>
+                                    <select id='course' name='course' onChange={(e) => { setCourse(e.target.value) }}>
+                                        <option value="" selected="selected">select course</option>
                                         <option value='graphic-design'>Graphic design</option>
                                         <option value='digital-marketing'>Digital marketing</option>
                                         <option value='photography'>Photography</option>
