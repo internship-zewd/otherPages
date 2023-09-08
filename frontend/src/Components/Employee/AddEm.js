@@ -19,6 +19,7 @@ function  AddEm () {
     const [regNum, setRegNum] = useState('');
     const [errors,setErrors]=useState({});
     const [password,setPassword]=useState('');
+    const [courseInactive,setCourseInactive]=useState(true)
 
 
 
@@ -45,7 +46,7 @@ function  AddEm () {
         }else if(middleName.length>15){
             validationErrors.middleName="Employee's middle name should be less than 16 characters"
         }
-        if(regName.test(lastName)){
+        if(!regName.test(lastName)){
             validationErrors.lastName="Employee's last name should consist of only letter"
         }else if(lastName.length<3){
             validationErrors.lastName="Employee's last name is supposed to be atleast 3 characters"
@@ -78,7 +79,7 @@ function  AddEm () {
         }else if(!validator.isDate(date)){
             validationErrors="Enter a valid date"
         }
-        if(!course.trim()){
+        if(!courseInactive && !course.trim()){
             validationErrors.course="Fill in the course the instructor teaches"
         }
         if(!regNum.trim()){
@@ -131,7 +132,13 @@ function  AddEm () {
                             <div className="input-box">
                             <div className="gender-details">
                                     <span className="details">Employee Type</span>
-                                    <select id='employeeType' name='employeeType'value={employeeType} onChange={(e) => { setEmployeeType(e.target.value) }} required >
+                                    <select id='employeeType' name='employeeType' value={employeeType} onChange={(e) => { 
+                                        setEmployeeType(e.target.value) 
+                                        if(e.target.value==="Instructor"){
+                                        setCourseInactive(false)}else{
+                                            setCourseInactive(true)
+                                        } }} required >
+
                                         <option value="" selected="selected">select type</option>
                                         <option value='Admin'>Admin</option>
                                         <option value='Manager'>Manager</option>
@@ -195,7 +202,7 @@ function  AddEm () {
                             <div className="input-box">
                                 <div className="gender-details">
                                     <span className="details">Course</span>
-                                    <select id='course' name='course' onChange={(e) => { setCourse(e.target.value) }}>
+                                    <select id='course' name='course' onChange={(e) => { setCourse(e.target.value) }} disabled={courseInactive}>
                                         <option value="" selected="selected">select course</option>
                                         <option value='graphic-design'>Graphic design</option>
                                         <option value='digital-marketing'>Digital marketing</option>

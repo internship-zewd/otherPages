@@ -3,7 +3,6 @@ import axios from 'axios'
 import './AddEm.css'
 export const Filter=(props)=>{
 
-    const [filterDropdown,setFilterDropdown]=useState(false);
     const data=props.data;
     const setData=props.setData
 
@@ -47,9 +46,10 @@ return(
     <div className="user-details">
   
         <form>
+        
         <div className = 'input-box'>
         <div className="gender-details">
-                <select onChange={(e)=>{getEmployee(e.target.value) }} disabled={filterDropdown}>
+                <select onChange={(e)=>{getEmployee(e.target.value) }} >
                     <option value="" selected="selected">All employees</option>
                     <option value="Admin">Admin</option>
                     <option value="Manager">Manager</option>
