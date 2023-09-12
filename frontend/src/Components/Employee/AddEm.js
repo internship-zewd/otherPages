@@ -29,6 +29,7 @@ function  AddEm () {
         const regEmail=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         // const regPassword=/[A-Z]/.test(p) && /[0-9]/.test(p) && !/[aeiou]/.test(p) && /^[@#][A-Za-z0-9]{7,13}$/
         const regName=/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
+        
         if(!employeeType.trim()){
             validationErrors.employeeType="Pick the employee type"
         }
@@ -37,7 +38,7 @@ function  AddEm () {
         }else if(firstName.length<3){
             validationErrors.firstName="Employee's first name is supposed to be atleast 3 characters"
         }else if(firstName.length>15){
-            validationErrors.firstName="Emplloyee's first name should be less than 16 characters"
+            validationErrors.firstName="Employee's first name should be less than 16 characters"
         }
         if(!regName.test(middleName)){
             validationErrors.middleName="Employee's middle name should consist of only letter"
@@ -82,12 +83,7 @@ function  AddEm () {
         if(!courseInactive && !course.trim()){
             validationErrors.course="Fill in the course the instructor teaches"
         }
-        if(!regNum.trim()){
-            validationErrors.regNum="Fill in employee's registration number"
-        }else if(regNum.length>8||regNum.length <3){
-            validationErrors.regNum="The registration number should be less than 8 characters and greater than 3 characters"
-
-        }
+        
         if(!phone.trim()){
             validationErrors.phone="Fill in employee's phone number"
         }
@@ -137,6 +133,8 @@ function  AddEm () {
                                         if(e.target.value==="Instructor"){
                                         setCourseInactive(false)}else{
                                             setCourseInactive(true)
+                                            setCourse("")
+                                            console.log(course)
                                         } }} required >
 
                                         <option value="" selected="selected">select type</option>
@@ -203,6 +201,7 @@ function  AddEm () {
                                 <div className="gender-details">
                                     <span className="details">Course</span>
                                     <select id='course' name='course' onChange={(e) => { setCourse(e.target.value) }} disabled={courseInactive}>
+
                                         <option value="" selected="selected">select course</option>
                                         <option value='graphic-design'>Graphic design</option>
                                         <option value='digital-marketing'>Digital marketing</option>
@@ -210,14 +209,7 @@ function  AddEm () {
                                         <option value='animation'>Animation and motion design</option>
                                     </select></div>
                                     <div className="errors">{errors.course}</div>
-                            </div>
-
-                            <div className='input-box'>
-                                <span className="details">Registration Number</span>
-                                <input type='number' id='regNum' required value={regNum} name='regNum' placeholder='Registration no.' onChange={(e) => { setRegNum(e.target.value) }} autoComplete='off' /><br />
-                                <div className="errors">{errors.regNum}</div>
-                                </div> 
-                              
+                            </div>                             
                                 
                                 <button type='submit' className="btn btn-info btn-block" name='submit' onChange={handleSubmit} >Submit</button>
                                 </div>

@@ -1,13 +1,6 @@
 module.exports=(sequelize,DataTypes)=>{
     const instructor=sequelize.define("instructor", {
-        employee_type:{
-            type:DataTypes.STRING,
-            allowNull:false,
-            validate:{
-                notEmpty:true
-            },
-        },
-        
+             
         first_name:{
             type:DataTypes.STRING,
             allowNull:false,
@@ -69,18 +62,12 @@ module.exports=(sequelize,DataTypes)=>{
     },
         course:{
             type:DataTypes.STRING,
-            allowNull:false,
-            validate:{
-                notEmpty:true,
-            },
+            // allowNull:false,
+            // validate:{
+            //     notEmpty:true,
+            // },
         },
-        registration_number:{
-            type:DataTypes.INTEGER,
-            allowNull:false,
-            validate:{
-                notEmpty:true
-            },
-        } 
+    
     },{
         freezeTableName:true,
         tableName:'instructor',
