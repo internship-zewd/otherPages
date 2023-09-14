@@ -78,7 +78,7 @@ await axios.get(`http://localhost:8081/instructor`)
                         <i className="uil uil-estate"></i>
                         <span className="text">Dashboard</span>
                     </div>
-
+           <div className="container">
                     <div className="boxes">
                         <div className="box box-1">
                             <i className="uil uil-graduation-cap"></i>
@@ -98,7 +98,7 @@ await axios.get(`http://localhost:8081/instructor`)
                             <span className="number">35</span>
                         </div>
                     </div>
-                </div>
+                
 
 
                 <div className="activity">
@@ -154,6 +154,8 @@ await axios.get(`http://localhost:8081/instructor`)
 
                 </div>
                     </div>
+                    </div>
+                </div>
                 </div>
                 </div>
   )
