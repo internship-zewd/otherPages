@@ -214,7 +214,7 @@ function AddSt () {
                                 </div>
 
 
-                                <button className="btn btn-info btn-block"
+                                <button className="btn btn-warning"
                                     type="submit" onChange={handleSubmit}
 
                                 >Register</button>

@@ -133,7 +133,7 @@ const menuItems =[
             </div>
 
             <div className="menuItems" >
-                <ul className="navLinks"  >
+                <ul className="navLinks " >
                    {
                     menuItems.map((menuItem, index) => (
                         <MenuItem 

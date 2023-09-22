@@ -17,17 +17,31 @@ function AddCo() {
                     <div className="content">
                         <form >
                             <div className="user-details">
-                                <div className="input-box">
+                               {/* <div className="input-box">
                                     <span className="details">Course Name</span>
                                     <input type="text" name="coursename" placeholder="Enter course name"   />
                                 </div>
 
                                 
-                                <div className="input-box">
+                                 <div className="input-box">
                                     <span className="details">Course ID</span>
                                     <input type="text" name="courseid"  required maxlength="10"  />
 
+                                </div> */}
+                                 <div className="input-box">
+
+                                    <span className="details">Course Name</span>
+                                    <select required  name="course">
+                                    <option value={null} selected='selected'>Select Course</option>
+                                    <option value='graphic-design'>Graphic design</option>
+                                        <option value='digital-marketing'>Digital marketing</option>
+                                        <option value='photography'>Photography</option>
+                                        <option value='animation'>Animation and motion design</option>
+                                    </select>
+                                    
+
                                 </div>
+
 
                                <div className="input-box">
                                     <span className="details">Tuition Fee</span>
@@ -42,10 +56,9 @@ function AddCo() {
                                 </div>
 
 
-                                <button className="btn btn-info btn-block"
-                                    type="submit" 
+                               <button type="button" class="btn btn-warning ">Submit</button> 
 
-                                >Submit</button>
+                                
 
                             </div>
                         </form>
