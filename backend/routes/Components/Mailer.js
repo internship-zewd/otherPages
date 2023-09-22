@@ -7,7 +7,6 @@ const html=`
 const Mailer=async(email)=>{
    const transporter=nodeMailer.createTransport({
     service:'gmail',
-    host:'localhost',
     port:456,
     secure:true,
     auth:{

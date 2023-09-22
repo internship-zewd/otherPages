@@ -1,7 +1,7 @@
 import '../DashContent/DashContent.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Popup.css';
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import axios from 'axios';
 
 
@@ -13,34 +13,97 @@ export const UpdatePopup=(props)=>{
     const setTrigger=props.setTrigger
     const updateProp=props.updateProp
     const id=updateProp.id
+    const employee_type= updateProp.employee_type
+    const first_name=updateProp.first_name
+    const middle_name=updateProp.middle_name
+    const last_name=updateProp.last_name
+    const _email =updateProp.email
+    const _password=updateProp.password
+    const _phone=updateProp.phone
+    const _salary=updateProp.salary
+    const employment_date=updateProp.employment_date
 
-    const[employeeType,setEmployeeType]=useState(updateProp.employee_type)
-    const [firstName,setFirstName]=useState(updateProp.first_name);
-    const [middleName,setMiddleName]=useState(updateProp.middle_name);
-    const [lastName,setLastName]=useState(updateProp.last_name);
-    const [email,setEmail]=useState(updateProp.email);
-    const [phone,setPhone]=useState(updateProp.phone);
-    const [salary,setSalary]=useState(updateProp.salary);
-    const [date,setDate]=useState(updateProp.employment_date);
-    const [course,setCourse]=useState(updateProp.course);
-    const [regNum,setRegNum]=useState(updateProp.registration_number);
+
+
+    const [employeeType,setEmployeeType]=useState("")
+    const [firstName,setFirstName]=useState("");
+    const [middleName,setMiddleName]=useState("");
+    const [lastName,setLastName]=useState("");
+    const [email,setEmail]=useState("");
+    const [phone,setPhone]=useState("");
+    const [password,setPassword]=useState("")
+    const [salary,setSalary]=useState("");
+    const [date,setDate]=useState("");
     const [errors,setErrors]=useState({})
     
+
+    useEffect(()=>{
+        setEmployeeType(employee_type)
+        setFirstName(first_name)
+        setMiddleName(middle_name)
+        setLastName(last_name)
+        setEmail(_email)
+        setPassword(_password)
+        setPhone(_phone)
+        setSalary(_salary)
+        setDate(employment_date)
+
+    },[employee_type,first_name,middle_name,last_name,_email,_phone,_salary,employment_date])
    
 // console.log(updateProp.id)
 
 
 const handleSubmit=async(e)=>{
-    //  e.preventDefault()
-    await axios.put(`http://localhost:8081/instructor/${id}`,{employeeType,firstName,middleName,lastName,email,phone,salary,date,course,regNum} )
+     e.preventDefault()
+     console.log(employee_type)
+console.log(employeeType)
+console.log(`this is the val ${first_name}  ${firstName}`)
+console.log(`${employeeType}===${updateProp.employee_type}`)
+console.log(email+_email)
+    console.log(employee_type+employeeType)
+    if (employeeType===employee_type){
+
+        console.log("im in here ")
+        await axios.put(`http://localhost:8081/${employee_type}/${id}`,{firstName,middleName,lastName,email,password,phone,salary,date} )
+        .then((res)=>{
+            console.log(res.data)
+            console.log("we're in put router ")
+        })
+        .catch((err)=>{
+            if(err){
+                console.log(err)
+            }
+        })
+        
+        }
+        else{
+            console.log(employeeType)
+         await axios.post(`http://localhost:8081/${employeeType}`,{firstName,middleName,lastName,email,password,phone,salary,date} )
     .then((res)=>{
+
         console.log(res.data)
+        console.log("we're in post hshahaa")
+        console.log(`the ${employee_type} id is ${id}`)
     })
     .catch((err)=>{
         if(err){
             console.log(err)
         }
     })
+    
+        await axios.delete(`http://localhost:8081/${updateProp.employee_type}/${id}`)
+        .then((res)=>{
+            console.log('removed successfully')
+        })
+        .catch((err)=>{
+            if(err){
+                console.log(err)
+            }
+        
+        })
+    }
+    
+        
 }
    return(props.trigger)?(
 
@@ -58,76 +121,65 @@ const handleSubmit=async(e)=>{
                        <form onSubmit={handleSubmit}>
                             <div className="user-details">
                                  <div className="input-box">
-                                     <span className="details">Employee Type</span>
-                                      <select id='employeeType' name='employeeType' defaultValue={updateProp.employee_type} onChange={(e) => { setEmployeeType(e.target.value) }}>
-                                        <option value='' selected='selected'>select type</option>
-                                        <option value='Admin'>Admin</option>
-                                        <option value='Manager'>Manager</option>
-                                        <option value='Accountant'>Accountant</option>
-                                        <option value='Instructor'>Instructor</option>
+                                     <span className="details">Employee Type {employeeType}</span>
+                                      <select id='employeeType' name='employeeType' required defaultValue={updateProp.employee_type} onChange={(e) => { setEmployeeType(e.target.value) }} autoComplete="on">
+                                        <option value=''>select type</option>
+                                        <option value='admin'>Admin</option>
+                                        <option value='manager'>Manager</option>
+                                        <option value='accountant'>Accountant</option>
+                                        <option value='instructor'>Instructor</option>
                                       </select>
                                  </div>
 
 
                                   <div className="input-box">
                                       <span className="details">First Name:</span>
-                                      <input type='text' id='firstName' required defaultValue={updateProp.first_name} onChange={(e) => { setFirstName(e.target.value) }} name='firstName' placeholder='First Name of employee' autoComplete='off' /><br />
+                                      <input type='text' id='firstName' required defaultValue={first_name} onChange={(e) => { setFirstName(e.target.value) }} name='firstName' placeholder='First Name of employee' autoComplete='on' /><br />
                                   </div>
 
 
                                   <div className="input-box">
                                       <span className="details">Middle Name:</span>
-                                      <input type='text' id='middleName' required defaultValue={updateProp.middle_name} onChange={(e) => { setMiddleName(e.target.value) }} name='middleName' placeholder='Middle Name of employee' autoComplete='off' /><br />
+                                      <input type='text' id='middleName' required defaultValue={middle_name} onChange={(e) => { setMiddleName(e.target.value) }} name='middleName' placeholder='Middle Name of employee' autoComplete='on' /><br />
                                   </div>
 
                                    <div className="input-box">
                                        <span className="details">Last Name:</span>
-                                       <input type='text' id='lastName' required defaultValue={updateProp.last_name} onChange={(e) => { setLastName(e.target.value) }} name='lastName' placeholder='Last Name of employee' autoComplete='off' /><br />
+                                       <input type='text' id='lastName' required defaultValue={last_name} onChange={(e) => { setLastName(e.target.value) }} name='lastName' placeholder='Last Name of employee' autoComplete='on' /><br />
                                   </div>
 
                                      <div className="input-box">
                                           <span className="details">Email:</span>
-                                          <input type='email' id='email' required defaultValue={updateProp.email} onChange={(e) => { setEmail(e.target.value) }} name='email' placeholder='Email' autoComplete='off' /><br />
+                                          <input type='email' id='email' required defaultValue={_email} onChange={(e) => { setEmail(e.target.value) }} name='email' placeholder='Email' autoComplete='on' /><br />
                                      </div>
+
+                                     <div className="input-box">
+                                <span className="details">Password:</span>
+                                <input type='password' id='password' required defaultValue={_password} onChange={(e)=>{setPassword(e.target.value )}} name='password' placeholder="Enter employees's password" autoComplete='on'/>
+                                {/* <div className="errors">{errors.password}</div> */}
+                                       </div>
+
 
                                        <div className="input-box">
                                             <span className="details">Phone:</span>
-                                            <input type='tel' id='phone' required defaultValue={updateProp.phone} onChange={(e) => { setPhone(e.target.value) }} name='phone' placeholder='Phone Number' autoComplete='off' /><br />
+                                            <input type='tel' id='phone' required defaultValue={_phone} onChange={(e) => { setPhone(e.target.value) }} name='phone' placeholder='Phone Number' autoComplete='on' /><br />
                                        </div>
 
 
                                        <div className="input-box">
                                            <span className="details">Salary:</span>
-                                           <input type='number' id='salary' required defaultValue={updateProp.salary} onChange={(e) => { setSalary(e.target.value) }} name='salary' placeholder='Enter Salary' autoComplete='off' /><br />
+                                           <input type='number' id='salary' required defaultValue={_salary} onChange={(e) => { setSalary(e.target.value) }} name='salary' placeholder='Enter Salary' autoComplete='on' /><br />
                                        </div>
 
                                           <div className="input-box">
                                             <span className="details">Date:</span>
-                                            <input type='date' id='date' required defaultValue={updateProp.employment_date} onChange={(e) => { setDate(e.target.value) }} name='date' placeholder='09--------' autoComplete='off' /><br />
+                                            <input type='date' id='date' required defaultValue={employment_date} onChange={(e) => { setDate(e.target.value) }} name='date' placeholder='09--------' autoComplete='on' /><br />
                                          </div>
-
-                                          <div className="input-box">
-                                                   <div className="gender-details">
-                                                         <span className="details">Course</span>
-                                                                <select id='course' name='course'defaultValue={updateProp.course} onChange={(e) => { setCourse(e.target.value) }}>
-                                                                      <option value='' selected='selected'>select course</option>
-                                                                      <option value='graphic-design'>Graphic design</option>
-                                                                      <option value='digital-marketing'>Digital marketing</option>
-                                                                      <option value='photography'>Photography</option>
-                                                                      <option value='animation'>Animation and motion design</option>
-                                                                  </select>
-                                                    </div>
-                                             </div>
-
-
-                                                   <div className='input-box'>
-                                                         <span className="details">Registration Number</span>
-                                                         <input type='number' id='regNum' required defaultValue={updateProp.registration_number} name='regNum' placeholder='Registration no.' onChange={(e) => { setRegNum(e.target.value) }} autoComplete='off' /><br />
-                                                    </div> 
-  
     
                                                  <button type='submit' className="btn btn-info btn-block" name='submit' onChange={handleSubmit} >Submit</button>
-                                                 <button className="btn btn-info btn-block" onClick={ ()=>{setTrigger(false)}}> close </button>  
+                                                 <button className="btn btn-info btn-block" onClick={ ()=>{ 
+                                                    window.location.reload()
+                                                    setTrigger(false)}}> close </button>  
                                                  </div>
     </form>
                    

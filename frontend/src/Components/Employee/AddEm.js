@@ -16,7 +16,6 @@ function  AddEm () {
     const [salary, setSalary] = useState('');
     const [date, setDate] = useState('');
     const [course, setCourse] = useState("");
-    const [regNum, setRegNum] = useState('');
     const [errors,setErrors]=useState({});
     const [password,setPassword]=useState('');
     const [courseInactive,setCourseInactive]=useState(true)
@@ -80,9 +79,6 @@ function  AddEm () {
         }else if(!validator.isDate(date)){
             validationErrors="Enter a valid date"
         }
-        if(!courseInactive && !course.trim()){
-            validationErrors.course="Fill in the course the instructor teaches"
-        }
         
         if(!phone.trim()){
             validationErrors.phone="Fill in employee's phone number"
@@ -93,9 +89,10 @@ function  AddEm () {
             alert('Employee Added successfully!')
         }
         if(Object.keys(validationErrors).length===0){
+            console.log(firstName+middleName+lastName+email+password+phone+salary+date+course)
 
         return await axios
-        .post("http://localhost:8081/instructor",{employeeType,firstName,middleName,lastName,email,password,phone,salary,date,course,regNum})
+        .post(`http://localhost:8081/${employeeType}`,{firstName,middleName,lastName,email,password,phone,salary,date,course})
         .then((res)=>{console.log(res)})
         .catch((err)=>{
             if(err){
@@ -128,20 +125,13 @@ function  AddEm () {
                             <div className="input-box">
                             <div className="gender-details">
                                     <span className="details">Employee Type</span>
-                                    <select id='employeeType' name='employeeType' value={employeeType} onChange={(e) => { 
-                                        setEmployeeType(e.target.value) 
-                                        if(e.target.value==="Instructor"){
-                                        setCourseInactive(false)}else{
-                                            setCourseInactive(true)
-                                            setCourse("")
-                                            console.log(course)
-                                        } }} required >
+                                    <select id='employeeType' name='employeeType' value={employeeType} onChange={(e) => {setEmployeeType(e.target.value)}}required >
 
                                         <option value="" selected="selected">select type</option>
-                                        <option value='Admin'>Admin</option>
-                                        <option value='Manager'>Manager</option>
-                                        <option value='Accountant'>Accountant</option>
-                                        <option value='Instructor'>Instructor</option>
+                                        <option value='admin'>Admin</option>
+                                        <option value='manager'>Manager</option>
+                                        <option value='accountant'>Accountant</option>
+                                        <option value='instructor'>Instructor</option>
                                     </select>
                                 </div>
                                 <div className="errors">{errors.employeeType}<br/></div>
@@ -197,19 +187,7 @@ function  AddEm () {
                                 <div className="errors">{errors.employmentDate}</div>
                             </div>
 
-                            <div className="input-box">
-                                <div className="gender-details">
-                                    <span className="details">Course</span>
-                                    <select id='course' name='course' onChange={(e) => { setCourse(e.target.value) }} disabled={courseInactive}>
-
-                                        <option value="" selected="selected">select course</option>
-                                        <option value='graphic-design'>Graphic design</option>
-                                        <option value='digital-marketing'>Digital marketing</option>
-                                        <option value='photography'>Photography</option>
-                                        <option value='animation'>Animation and motion design</option>
-                                    </select></div>
-                                    <div className="errors">{errors.course}</div>
-                            </div>                             
+                                                         
                                 
                                 <button type='submit' className="btn btn-info btn-block" name='submit' onChange={handleSubmit} >Submit</button>
                                 </div>

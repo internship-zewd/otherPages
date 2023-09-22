@@ -10,8 +10,12 @@ import axios from 'axios'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import {getAllEmployees} from './getAllEmployees'
 
 function AllEm() {
+
+
+
 
     const [search,setSearch]=useState("");
     const [data,setData]=useState([]);
@@ -19,35 +23,63 @@ function AllEm() {
     const[buttonPopup,setButtonPopup]=useState(false);
     const [employeeInfo,setEmployeeInfo]=useState({});
     const [updatePopup,setUpdatePopup]=useState(false);
+
+
+
    
     useEffect(()=>{ 
-        getEmployee();
-    
+        // <getAllEmployees data={data} setData={setData}/>
+        getAllEmployees()
+      
        },[])
-    
-    const getEmployee=async()=>{
-    
-        await axios.get('http://localhost:8081/instructor')
-        .then((res)=>{
+       const getAllEmployees=async()=>{
+        
+        const instructor=await axios.get('http://localhost:8081/instructor')
+        const admin=await axios.get('http://localhost:8081/admin')
+        await axios.all([instructor,admin])
+        .then( 
+           axios.spread((...allData)=>{
+            const instructor=allData[0].data
+            const admin=allData[1].data
+          console.log(admin)
+         
+         
+          const getEmployees=[instructor,admin]
+        
+          console.log(getEmployees)           
+                const employees=[]
+                var k =0; 
+
+                for(var i=0;i<getEmployees.length;i++){
+                    
+                    for(var j=0;j<getEmployees[i].length;j++){
+                        
+                            employees[k]=getEmployees[i][j]
+                            k++
+              
+            }}
+            console.log(employees)
+             setData(employees); 
+       
+           }) 
             
-            setData(res.data)
-            
-        })
+    )
         .catch((err)=>{
             if(err){console.log(err)}
         })
+   
+}
     
-    }
-    const handleView=async(e,id)=>{
+    
+    const handleView=async(e,id,employee)=>{
         // e.preventDefault();
-        return await axios.get(`http://localhost:8081/instructor/${id}`)
+        console.log(employeeInfo)
+        return await axios.get(`http://localhost:8081/${employee}/${id}`)
         .then((response)=>{
     
             const viewData=response.data
     
             setEmployeeInfo(viewData)
-            // console.log(response.data)
-            // console.log(employeeInfo)
             setButtonPopup(true)
         
             
@@ -59,14 +91,14 @@ function AllEm() {
     
     
     }
-    const handleUpdate=async(e,id)=>{
+    const handleUpdate=async(e,id,employee)=>{
     
-        // e.preventDefault(); 
-        await axios.get(`http://localhost:8081/instructor/${id}`)
+        
+        await axios.get(`http://localhost:8081/${employee}/${id}`)
         .then((response)=>{
             setEmployeeInfo(response.data)
             console.log(response.data)
-            console.log(employeeInfo.employee_type)
+
             setUpdatePopup(true)
         })
         .catch((err)=>{
@@ -78,11 +110,11 @@ function AllEm() {
         
     
     }
-    const handleDelete=async(e,id)=>{
+    const handleDelete=async(e,id,employee)=>{
+
            
-    await axios.delete(`http://localhost:8081/instructor/${id}`)
-    .then((res)=>{console.log("deleted"+ res)
-    console.log(res)})
+    await axios.delete(`http://localhost:8081/${employee}/${id}`)
+    .then((res)=>{console.log("deleted"+ res)})
     window.location.reload()
     
     }
@@ -98,7 +130,7 @@ function AllEm() {
                     <div className="content">
    
                    <div className="user-details">
-                   <Filter data={data} setData={setData} /> 
+                   <Filter data={data} setData={setData}/> 
                    <form>
                  
                     <div className='input-box'>
@@ -132,17 +164,18 @@ function AllEm() {
     
 
     <tr key={item.id}>
-        <td>{item.id}</td>
+        <td>{item.id_tag}</td>
         <td>{item.first_name}  {item.middle_name} {item.last_name}</td>
         <td>{item.employee_type}</td>
         
-        <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleView(e, item.id)}}><VisibilityIcon/></button>
-                                    <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleUpdate(e, item.id)}}><EditIcon/></button>
+        <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleView(e, item.id,item.employee_type) }}><VisibilityIcon/></button>
+                                    <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleUpdate(e, item.id,item.employee_type)}}><EditIcon/></button>
                                     <UpdatePopup trigger={updatePopup} setTrigger={setUpdatePopup} updateProp={employeeInfo}/>
+                                   
                                     
                                    <ViewPopup trigger={buttonPopup} setTrigger={setButtonPopup} employeeProp={employeeInfo} />
                                     
-                                    <button  className='btn btn-sm btn-danger' onClick={(e) => { handleDelete(e, item.id) }}> <DeleteIcon/></button>   </tr>
+                                    <button  className='btn btn-sm btn-danger' onClick={(e) => { handleDelete(e,item.id,item.employee_type ) }}> <DeleteIcon/></button>   </tr>
                         
 ))}
 </tbody>
