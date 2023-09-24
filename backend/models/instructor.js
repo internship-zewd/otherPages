@@ -63,7 +63,7 @@ module.exports=(sequelize,DataTypes)=>{
             type:DataTypes.DATEONLY,
              allowNull:false,
             validate:{
-                notEmpty:true,
+                // notEmpty:true,
                 
         },
     },

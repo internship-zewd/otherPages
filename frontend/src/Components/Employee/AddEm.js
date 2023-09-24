@@ -23,24 +23,24 @@ function  AddEm () {
 
 
 
-    const handleSubmit=async(e)=>{
+    let handleSubmit=async(e)=>{
         e.preventDefault()
-        const validationErrors={}
-        const regEmail=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        let validationErrors={}
+        let regEmail=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         // const regPassword=/[A-Z]/.test(p) && /[0-9]/.test(p) && !/[aeiou]/.test(p) && /^[@#][A-Za-z0-9]{7,13}$/
-        const regName=/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
+        let regName=/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/ ;
         if(!employeeType.trim()){
-            validationErrors.employeeType="Pick the employee type"
+            validationErrors.employeeType="Pick the employee type";
         }
         if(!regName.test(firstName)){
-            validationErrors.firstName="Employee's first name should consist of only letters"
+            validationErrors.firstName="Employee's first name should consist of only letters";
         }else if(firstName.length<3){
-            validationErrors.firstName="Employee's first name is supposed to be atleast 3 characters"
+            validationErrors.firstName="Employee's first name is supposed to be atleast 3 characters";
         }else if(firstName.length>15){
-            validationErrors.firstName="Emplloyee's first name should be less than 16 characters"
+            validationErrors.firstName="Emplloyee's first name should be less than 16 characters";
         }
         if(!regName.test(middleName)){
-            validationErrors.middleName="Employee's middle name should consist of only letter"
+            validationErrors.middleName="Employee's middle name should consist of only letter";
         }else if(middleName.length<3){
             validationErrors.middleName="Employee's middle name is supposed to be atleast 3 characters"
         }else if(middleName.length>15){
@@ -75,22 +75,21 @@ function  AddEm () {
             validationErrors.salary="salary must not exceed 6 characters."
         }
         if(!date.trim()){
-            validationErrors.employmentDate="Fill in employee's employment date"
-        }else if(!validator.isDate(date)){
-            validationErrors="Enter a valid date"
+            validationErrors.employmentDate="Fill in employee's employment date";
         }
+        // else if(!validator.isDate(date)){
+        //     validationErrors="Enter a valid date";
+        // }
         if(!courseInactive && !course.trim()){
-            validationErrors.course="Fill in the course the instructor teaches"
+            validationErrors.course="Fill in the course the instructor teaches";
         }
         if(!regNum.trim()){
-            validationErrors.regNum="Fill in employee's registration number"
+            validationErrors.regNum="Fill in employee's registration number";
         }else if(regNum.length>8||regNum.length <3){
-            validationErrors.regNum="The registration number should be less than 8 characters and greater than 3 characters"
+            validationErrors.regNum="The registration number should be less than 8 characters and greater than 3 characters";
 
         }
-        if(!phone.trim()){
-            validationErrors.phone="Fill in employee's phone number"
-        }
+        
 
         setErrors(validationErrors)
         if(Object.keys(validationErrors).length===0){

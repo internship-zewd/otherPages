@@ -16,9 +16,14 @@ app.use(bodyParser.json());
 PORT=8081
 const studentRoute=require('./routes/student')
 app.use('/student',studentRoute)
-PORT=8081
+
 const instructorRoute=require('./routes/instructor')
 app.use('/instructor',instructorRoute)
+
+
+const courseRoute=require('./routes/course')
+app.use('/course',courseRoute)
+
 
 db.sequelize.sync().then((req)=>{
     app.listen(PORT,()=>{

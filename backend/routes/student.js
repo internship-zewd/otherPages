@@ -58,6 +58,11 @@ router.post('/',(req,res)=>{
         }})
         res.send('insert');
 });
+
+
+
+
+
 router.put('/:id',(req,res)=>{
     
     
@@ -84,6 +89,9 @@ router.put('/:id',(req,res)=>{
         if(err)
         {console.log(err)}
     })})
+
+
+
 
 
 router.delete('/:id',(req,res)=>{

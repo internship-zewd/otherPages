@@ -3,7 +3,7 @@ import '../DashContent/DashContent.css'
 import validator from 'validator'
 import './Addst.css'
 import axios from 'axios';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function AddSt () {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -18,11 +18,11 @@ function AddSt () {
     const [errors, setErrors] = useState('');
     const[transcript,setTranscript]=useState(null)
 
-    const handleSubmit = async(e) => {
+    let handleSubmit = async(e) => {
         e.preventDefault();
-        const validationErrors = {}
+        let validationErrors = {}
 
-        const regEmail=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        let regEmail=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
        
         if(gender===null){
             validationErrors.gender="Pick the student's gender"
