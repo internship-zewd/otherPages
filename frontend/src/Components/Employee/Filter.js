@@ -5,37 +5,16 @@ export const Filter=(props)=>{
 
     const data=props.data;
     const setData=props.setData
-
-    useEffect(()=>{
-        getEmployee();
-    },[])
     
-    const getEmployee=async(employeeType)=>{
-       
-
-        await axios.get('http://localhost:8081/instructor')
-        .then((res)=>{
-            
-            setData(res.data) 
-            console.log(res.data) 
-       
+ 
+    const filterEmployeeType=async(employeeType)=>{
+        props.getAllEmployees()
+        
             setData(
-                    res.data.filter((item)=>{
+                data.filter((item)=>{
                       return employeeType===""?item:
                       item.employee_type.includes(employeeType)
-            }))
-                
-            
-        })
-        .catch((err)=>{
-            if(err){console.log(err)}
-        })
-    
-    }
-    
-
-   
-
+            }))}
 
     
     
@@ -49,7 +28,7 @@ return(
         
         <div className = 'input-box'>
         <div className="gender-details">
-                <select onChange={(e)=>{getEmployee(e.target.value) }} >
+                <select onChange={(e)=>{filterEmployeeType(e.target.value) }} >
                     <option value="" selected="selected">All employees</option>
                     <option value="Admin">Admin</option>
                     <option value="Manager">Manager</option>
@@ -67,7 +46,7 @@ return(
 
                
                 
-               
+          {props.children}     
                 </div>
                 </div>
              

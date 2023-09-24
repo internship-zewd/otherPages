@@ -1,9 +1,9 @@
 module.exports=(sequelize,DataTypes)=>{
-    const instructor=sequelize.define("instructor", {
-        id:{
-            type:DataTypes.INTEGER,
-            autoIncrement:true,
-            primaryKey:true,
+    const admin=sequelize.define("admin", {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
         },
         id_tag:{
             type: DataTypes.STRING,
@@ -11,7 +11,10 @@ module.exports=(sequelize,DataTypes)=>{
             validate:{
                 notEmpty:true
             },
+
+
         },
+                     
         first_name:{
             type:DataTypes.STRING,
             allowNull:false,
@@ -67,15 +70,15 @@ module.exports=(sequelize,DataTypes)=>{
             type:DataTypes.DATEONLY,
              allowNull:false,
             validate:{
-                // notEmpty:true,
+                notEmpty:true,
                 
         },
     },
-}
-    ,{
+    
+    },{
         freezeTableName:true,
-        tableName:'instructor',
+        tableName:'admin',
         underscored:true
     })
-    return instructor
+    return admin
 }

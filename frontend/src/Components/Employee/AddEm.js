@@ -16,7 +16,6 @@ function  AddEm () {
     const [salary, setSalary] = useState('');
     const [date, setDate] = useState('');
     const [course, setCourse] = useState("");
-    const [regNum, setRegNum] = useState('');
     const [errors,setErrors]=useState({});
     const [password,setPassword]=useState('');
     const [courseInactive,setCourseInactive]=useState(true)
@@ -29,6 +28,8 @@ function  AddEm () {
         let regEmail=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         // const regPassword=/[A-Z]/.test(p) && /[0-9]/.test(p) && !/[aeiou]/.test(p) && /^[@#][A-Za-z0-9]{7,13}$/
         let regName=/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/ ;
+        // const regName=/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
+        
         if(!employeeType.trim()){
             validationErrors.employeeType="Pick the employee type";
         }
@@ -38,6 +39,7 @@ function  AddEm () {
             validationErrors.firstName="Employee's first name is supposed to be atleast 3 characters";
         }else if(firstName.length>15){
             validationErrors.firstName="Emplloyee's first name should be less than 16 characters";
+            validationErrors.firstName="Employee's first name should be less than 16 characters"
         }
         if(!regName.test(middleName)){
             validationErrors.middleName="Employee's middle name should consist of only letter";
@@ -90,15 +92,20 @@ function  AddEm () {
 
         }
         
+        
+        if(!phone.trim()){
+            validationErrors.phone="Fill in employee's phone number"
+        }
 
         setErrors(validationErrors)
         if(Object.keys(validationErrors).length===0){
             alert('Employee Added successfully!')
         }
         if(Object.keys(validationErrors).length===0){
+            console.log(firstName+middleName+lastName+email+password+phone+salary+date+course)
 
         return await axios
-        .post("http://localhost:8081/instructor",{employeeType,firstName,middleName,lastName,email,password,phone,salary,date,course,regNum})
+        .post(`http://localhost:8081/${employeeType}`,{firstName,middleName,lastName,email,password,phone,salary,date,course})
         .then((res)=>{console.log(res)})
         .catch((err)=>{
             if(err){
@@ -131,18 +138,13 @@ function  AddEm () {
                             <div className="input-box">
                             <div className="gender-details">
                                     <span className="details">Employee Type</span>
-                                    <select id='employeeType' name='employeeType' value={employeeType} onChange={(e) => { 
-                                        setEmployeeType(e.target.value) 
-                                        if(e.target.value==="Instructor"){
-                                        setCourseInactive(false)}else{
-                                            setCourseInactive(true)
-                                        } }} required >
+                                    <select id='employeeType' name='employeeType' value={employeeType} onChange={(e) => {setEmployeeType(e.target.value)}}required >
 
                                         <option value="" selected="selected">select type</option>
-                                        <option value='Admin'>Admin</option>
-                                        <option value='Manager'>Manager</option>
-                                        <option value='Accountant'>Accountant</option>
-                                        <option value='Instructor'>Instructor</option>
+                                        <option value='admin'>Admin</option>
+                                        <option value='manager'>Manager</option>
+                                        <option value='accountant'>Accountant</option>
+                                        <option value='instructor'>Instructor</option>
                                     </select>
                                 </div>
                                 <div className="errors">{errors.employeeType}<br/></div>
@@ -198,25 +200,7 @@ function  AddEm () {
                                 <div className="errors">{errors.employmentDate}</div>
                             </div>
 
-                            <div className="input-box">
-                                <div className="gender-details">
-                                    <span className="details">Course</span>
-                                    <select id='course' name='course' onChange={(e) => { setCourse(e.target.value) }} disabled={courseInactive}>
-                                        <option value="" selected="selected">select course</option>
-                                        <option value='graphic-design'>Graphic design</option>
-                                        <option value='digital-marketing'>Digital marketing</option>
-                                        <option value='photography'>Photography</option>
-                                        <option value='animation'>Animation and motion design</option>
-                                    </select></div>
-                                    <div className="errors">{errors.course}</div>
-                            </div>
-
-                            <div className='input-box'>
-                                <span className="details">Registration Number</span>
-                                <input type='number' id='regNum' required value={regNum} name='regNum' placeholder='Registration no.' onChange={(e) => { setRegNum(e.target.value) }} autoComplete='off' /><br />
-                                <div className="errors">{errors.regNum}</div>
-                                </div> 
-                              
+                                                         
                                 
                                 <button type='submit' className="btn btn-warning" name='submit' onChange={handleSubmit} >Submit</button>
                                 </div>

@@ -50,7 +50,7 @@ router.post('/',(req,res)=>{
      registno : req.body.registno,
         
     })
-    .then(console.log(req.body)
+    .then(console.log(res)
         )
     .catch((err)=>{
         if(err){
