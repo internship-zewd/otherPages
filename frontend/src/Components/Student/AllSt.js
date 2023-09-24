@@ -28,7 +28,7 @@ function AllSt() {
 
       await axios.get('http://localhost:8081/student')
       .then((res)=>{
-          
+          console.log("this is all the studens"+res)
           setData(res.data)
           
       })

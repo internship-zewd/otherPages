@@ -11,29 +11,21 @@ module.exports=(sequelize,DataTypes)=>{
             validate:{
                 notEmpty:true
             },
+        },
 
-
-        },
-                     
-        first_name:{
+        full_identification:{
             type:DataTypes.STRING,
-            allowNull:false,
-            validate:{
-                notEmpty:true
-            },
-        },
-        middle_name:{
-            type:DataTypes.STRING,
-            allowNull:false,
-            validate:{
-                notEmpty:true
-            },
-        },
-        last_name:{
-            type:DataTypes.STRING,
-            allowNull:false,
+            allowNull:true,
             validate:{
                 notEmpty:true,
+            },
+        },
+                     
+        full_name:{
+            type:DataTypes.STRING,
+            allowNull:false,
+            validate:{
+                notEmpty:true
             },
         },
         email:{
@@ -66,14 +58,6 @@ module.exports=(sequelize,DataTypes)=>{
                 notEmpty:true
             },
         },
-        employment_date:{
-            type:DataTypes.DATEONLY,
-             allowNull:false,
-            validate:{
-                notEmpty:true,
-                
-        },
-    },
     
     },{
         freezeTableName:true,

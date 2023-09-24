@@ -171,11 +171,7 @@ console.log(email+_email)
                                            <input type='number' id='salary' required defaultValue={_salary} onChange={(e) => { setSalary(e.target.value) }} name='salary' placeholder='Enter Salary' autoComplete='on' /><br />
                                        </div>
 
-                                          <div className="input-box">
-                                            <span className="details">Date:</span>
-                                            <input type='date' id='date' required defaultValue={employment_date} onChange={(e) => { setDate(e.target.value) }} name='date' placeholder='09--------' autoComplete='on' /><br />
-                                         </div>
-    
+                                
                                                  <button type='submit' className="btn btn-info btn-block" name='submit' onChange={handleSubmit} >Submit</button>
                                                  <button className="btn btn-info btn-block" onClick={ ()=>{ 
                                                     window.location.reload()

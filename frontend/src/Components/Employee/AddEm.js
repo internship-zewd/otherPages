@@ -3,7 +3,7 @@ import '../DashContent/DashContent.css'
 import axios from 'axios';
 import "./AddEm.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import validator from 'validator';
+// import validator from 'validator';
 
 function  AddEm () {
 
@@ -73,11 +73,6 @@ function  AddEm () {
             validationErrors.salary="Fill in employee's salary"
         }else if(salary.length>6){
             validationErrors.salary="salary must not exceed 6 characters."
-        }
-        if(!date.trim()){
-            validationErrors.employmentDate="Fill in employee's employment date"
-        }else if(!validator.isDate(date)){
-            validationErrors="Enter a valid date"
         }
         
         if(!phone.trim()){
@@ -179,12 +174,6 @@ function  AddEm () {
                                 <span className="details">Salary:</span>
                                 <input type='number' id='salary' required value={salary} onChange={(e) => { setSalary(e.target.value) }} name='salary' placeholder='Enter Salary' autoComplete='off' /><br />
                                 <div className="errors">{errors.salary}</div>
-                            </div>
-
-                            <div className="input-box">
-                                <span className="details">Date:</span>
-                                <input type='date' id='date' required value={date} onChange={(e) => { setDate(e.target.value) }} name='date' placeholder='09--------' autoComplete='off' /><br />
-                                <div className="errors">{errors.employmentDate}</div>
                             </div>
 
                                                          

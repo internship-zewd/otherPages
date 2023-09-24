@@ -1,4 +1,5 @@
 const nodeMailer=require('nodemailer')
+require ('dotenv').config()
 
 const html=`
 <h1> Hello worrld </h1>
@@ -7,7 +8,6 @@ const html=`
 const Mailer=async(email)=>{
    const transporter=nodeMailer.createTransport({
     service:'gmail',
-    port:456,
     secure:true,
     auth:{
         user:process.env.USER,
@@ -28,7 +28,6 @@ transporter.sendMail(mailOptions,function(error,info){
     if(error){console.log(error)}
     else(console.log("Message sent:" +info.reponse))
 })
-return "happened"
 
 }
 

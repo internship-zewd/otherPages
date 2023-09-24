@@ -32,6 +32,10 @@ router.get('/:id', (req,res)=>{
     .then((admin)=>{
 
         let value=admin.dataValues
+        const name=value.full_name.split(" ")
+        value.first_name=name[0]
+        value.middle_name=name[1]
+        value.last_name=name[2]
         value.employee_type="admin"
 
         
@@ -50,14 +54,17 @@ console.log(value)
 
 router.post('/',async (req,res)=>{
     const {firstName,middleName,lastName,email,password,phone,salary,date}=req.body
+    const fullName=firstName+" "+middleName+" "+lastName
+  
     const previousId= await admin.max('id')
 const idTagValue= previousId!==null? `ADM${1000+previousId}`:`ADM${1000}`
+const fullIdentification=idTagValue+" "+fullName
     admin.create({
+        
 
         id_tag:idTagValue,
-        first_name:firstName,
-        middle_name:middleName,
-        last_name:lastName,
+        full_name:fullName,
+        full_identification:fullIdentification,
         email:email,
         password:password,
         phone:phone,
@@ -78,17 +85,18 @@ const idTagValue= previousId!==null? `ADM${1000+previousId}`:`ADM${1000}`
         }})
 });
 
-router.put('/:id',(req,res)=>{
+router.put('/:id',async(req,res)=>{
     console.log("im in admin put")
     const {firstName,middleName,lastName,email,password,phone,salary,date}=req.body
-    const previousId=admin.max('id')
+    const fullName=firstName+" "+middleName+" "+lastName
+    const previousId=await admin.max('id')
     const idTagValue=previousId!==null?`ADM${1000+previousId}`:`ADM${1000}`
+    const fullIdentification=idTagValue+" "+fullName
     admin.update(
         {     
         id_tag:idTagValue,
-        first_name:firstName,
-        middle_name:middleName,
-        last_name:lastName,
+        full_name:fullName,
+        full_identification:fullIdentification,
         email:email,
         password:password,
         phone:phone,

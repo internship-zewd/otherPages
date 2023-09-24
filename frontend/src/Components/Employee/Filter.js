@@ -6,17 +6,20 @@ export const Filter=(props)=>{
     const data=props.data;
     const setData=props.setData
     
+   
  
-    const filterEmployeeType=async(employeeType)=>{
-        props.getAllEmployees()
-        
-            setData(
-                data.filter((item)=>{
+    const filterEmployeeType=(employeeType)=>{
+        // props.getAllEmployees()
+
+            
+                const filteredData=data.filter((item)=>{
                       return employeeType===""?item:
                       item.employee_type.includes(employeeType)
-            }))}
+            })
+        setData(filteredData)
+        }
 
-    
+       
     
 return(
    
@@ -30,10 +33,10 @@ return(
         <div className="gender-details">
                 <select onChange={(e)=>{filterEmployeeType(e.target.value) }} >
                     <option value="" selected="selected">All employees</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Manager">Manager</option>
-                    <option value="Instructor">Instructor</option>
-                    <option value="Accountant">Accountant</option>
+                    <option value="admin">Admin</option>
+                    <option value="manager">Manager</option>
+                    <option value="instructor">Instructor</option>
+                    <option value="accountant">Accountant</option>
 
                 </select> 
                     

@@ -40,6 +40,10 @@ router.get('/:id', (req,res)=>{
         
 
         value=instructor.dataValues
+        const name=value.full_name.split(" ")
+        value.first_name=name[0]
+        value.middle_name=name[1]
+        value.last_name=name[2]
         value.employee_type="instructor"
 
         console.log(instructor)
@@ -62,21 +66,19 @@ router.post('/',async (req,res)=>{
     const {firstName,middleName,lastName,email,password,phone,salary,date}=req.body
     const previousId=await instructor.max('id');
     const idTagValue=previousId!==null?`INS${1000+previousId}`:`INS${1000}`
+    const fullName=firstName+" "+middleName+" "+lastName
+    const fullIdentification=idTagValue+" "+fullName
        
     instructor.create({
+
         id_tag:idTagValue,
-        
-        first_name:firstName,
-        middle_name:middleName,
-        last_name:lastName,
+        full_name:fullName,
+        full_identification:fullIdentification,
         email:email,
         password:password,
         phone:phone,
         salary:salary,
-        employment_date:date,
-        
-    
-        
+
     })
     .then(res.send()
         // ()=>{if(res.status===200){console.log(Mailer(userEmail))}}
@@ -93,20 +95,21 @@ router.put('/:id',async (req,res)=>{
     const {firstName,middleName,lastName,email,password,phone,salary,date}=req.body;
     const previousId=await instructor.max('id');
     const idTagValue=previousId!==null?`INS${1000+previousId}`:`INS${1000}`
+    const fullName=firstName+" "+middleName+" "+lastName
+    const fullIdentification=idTagValue+" "+fullName
+
     
     instructor.update(
         {
-            id_tag:idTagValue,
-
-        first_name:firstName,
-        middle_name:middleName,
-        last_name:lastName,
+            
+        id_tag:idTagValue,
+        full_name:fullName,
+        full_identification:fullIdentification,
         email:email,
         password:password,
         phone:phone,
         salary:salary,
-        employment_date:date,
-        },
+    },
 
        { where:{id:req.params.id}})
     .then((instructors)=>{

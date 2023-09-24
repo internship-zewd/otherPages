@@ -1,5 +1,5 @@
 const bodyParser = require('body-parser')
-const {student}=require('./models')
+
 const db=require('./models')
 const express=require('express')
 const cors=require('cors')
@@ -23,7 +23,7 @@ app.use(`/instructor`,instructorRoute)
 const adminRoute=require("./routes/admin")
 app.use('/admin',adminRoute)
 
-db.sequelize.sync().then((req)=>{
+db.sequelize.sync({alter:true}).then((req)=>{
     app.listen(PORT,()=>{
         console.log(`app is listening on ${PORT}`)
     })} 

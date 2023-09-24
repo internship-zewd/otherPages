@@ -1,5 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
     const student = sequelize.define("student", {
+        course_id:{
+            type:DataTypes.INTEGER,
+            allowNull:false
+        },
         username: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -84,5 +88,8 @@ module.exports = (sequelize, DataTypes) => {
     underscored:true
 
 })
+student.associate = (models) => {
+    student.belongsTo(models.course, { foreignKey: 'course_id' ,as:'student_course'});
+  };
 return student
 }

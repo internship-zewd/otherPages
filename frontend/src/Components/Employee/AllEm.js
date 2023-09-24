@@ -78,6 +78,7 @@ function AllEm() {
         .then((response)=>{
     
             const viewData=response.data
+            console.log(viewData)
     
             setEmployeeInfo(viewData)
             setButtonPopup(true)
@@ -130,7 +131,7 @@ function AllEm() {
                     <div className="content">
    
                    <div className="user-details">
-                   <Filter data={data} setData={setData}/> 
+                   <Filter data={data} setData={setData} getAllEmployees={getAllEmployees}/> 
                    <form>
                  
                     <div className='input-box'>
@@ -165,7 +166,7 @@ function AllEm() {
 
     <tr key={item.id}>
         <td>{item.id_tag}</td>
-        <td>{item.first_name}  {item.middle_name} {item.last_name}</td>
+        <td>{item.full_name}</td>
         <td>{item.employee_type}</td>
         
         <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleView(e, item.id,item.employee_type) }}><VisibilityIcon/></button>
