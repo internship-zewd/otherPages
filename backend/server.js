@@ -2,7 +2,7 @@ const bodyParser = require('body-parser')
 
 const db=require('./models')
 const express=require('express')
-const cors=require('cors')
+const cors= require('cors')
 const app= express();
 PORT=8081
 
@@ -16,12 +16,21 @@ app.use(bodyParser.json());
 
 const studentRoute=require('./routes/student')
 app.use('/student',studentRoute)
-
-
+PORT=8081
 const instructorRoute=require('./routes/instructor')
 app.use(`/instructor`,instructorRoute)
+
 const adminRoute=require("./routes/admin")
 app.use('/admin',adminRoute)
+
+
+const courseRoute=require('./routes/course')
+app.use('/course',courseRoute)
+
+
+
+const courseRoute=require('./routes/course')
+app.use('/course',courseRoute)
 
 db.sequelize.sync({alter:true}).then((req)=>{
     app.listen(PORT,()=>{
