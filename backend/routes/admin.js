@@ -1,7 +1,7 @@
 const express=require('express')
 const router=express.Router()
 const {admin}=require('../models')
-const Mailer=require('./Components/Mailer')
+const Mailer=require('./Mailer')
 
 
 router.get('/', (req, res) => {
@@ -59,6 +59,7 @@ router.post('/',async (req,res)=>{
     const previousId= await admin.max('id')
 const idTagValue= previousId!==null? `ADM${1000+previousId}`:`ADM${1000}`
 const fullIdentification=idTagValue+" "+fullName
+Mailer(email)
     admin.create({
         
 
@@ -75,8 +76,8 @@ const fullIdentification=idTagValue+" "+fullName
         
     })
     .then(
-        res.send()
-        // ()=>{if(res.status===200){console.log(Mailer(userEmail))}}
+        res.send()      
+
     )
 
     .catch((err)=>{

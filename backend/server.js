@@ -29,9 +29,6 @@ app.use('/course',courseRoute)
 
 
 
-const courseRoute=require('./routes/course')
-app.use('/course',courseRoute)
-
 db.sequelize.sync({alter:true}).then((req)=>{
     app.listen(PORT,()=>{
         console.log(`app is listening on ${PORT}`)

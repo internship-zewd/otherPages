@@ -19,6 +19,7 @@ function AllEm() {
 
     const [search,setSearch]=useState("");
     const [data,setData]=useState([]);
+    const[dataInitial,setDataInitial]=useState([])
     const [error,setError]=useState({});
     const[buttonPopup,setButtonPopup]=useState(false);
     const [employeeInfo,setEmployeeInfo]=useState({});
@@ -60,6 +61,8 @@ function AllEm() {
             }}
             console.log(employees)
              setData(employees); 
+             setDataInitial(employees);
+            
        
            }) 
             
@@ -131,7 +134,7 @@ function AllEm() {
                     <div className="content">
    
                    <div className="user-details">
-                   <Filter data={data} setData={setData} getAllEmployees={getAllEmployees}/> 
+                   <Filter data={data} setData={setData} getAllEmployees={getAllEmployees} dataInitial={dataInitial}/> 
                    <form>
                  
                     <div className='input-box'>
@@ -158,13 +161,14 @@ function AllEm() {
 
 { data.filter((item)=>{
     return search.toLowerCase() === ''? item: 
-    item.first_name.toLowerCase().includes(search);
+    item.full_name.toLowerCase().includes(search);
 
 })
 .map((item,index)=> (
     
 
     <tr key={item.id}>
+        {console.log(data)}
         <td>{item.id_tag}</td>
         <td>{item.full_name}</td>
         <td>{item.employee_type}</td>

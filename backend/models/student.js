@@ -4,6 +4,10 @@ module.exports = (sequelize, DataTypes) => {
             type:DataTypes.INTEGER,
             allowNull:false
         },
+        attendanceId:{
+            type:DataTypes.INTEGER,
+            allowNull:false
+        },
         username: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -11,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty: true
             },
         },
-
         email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -90,6 +93,11 @@ module.exports = (sequelize, DataTypes) => {
 })
 student.associate = (models) => {
     student.belongsTo(models.course, { foreignKey: 'course_id' ,as:'student_course'});
+    student.belongsTo(models.Class,{foreignKey:"classId"})
+    student.belongsTo(models.attendance,{foreignKey:"attendanceId"})
+
+
+
   };
 return student
 }
