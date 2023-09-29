@@ -50,6 +50,7 @@ module.exports = (sequelize, DataTypes) => {
 course.associate = (models) => {
     course.hasMany(models.student, { foreignKey: 'course_id' });
     course.hasMany(models.classes, { foreignKey: 'course_id' });
+    course.hasMany(models.Class,{foreignKey:"courseId"})
   };
 return course
 }

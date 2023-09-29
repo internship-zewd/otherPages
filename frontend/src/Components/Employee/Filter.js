@@ -3,24 +3,29 @@ import axios from 'axios'
 import './AddEm.css'
 export const Filter=(props)=>{
 
-    const data=props.data;
+    let data=props.data;
     const setData=props.setData
-    
-   
- 
-    const filterEmployeeType=(employeeType)=>{
-        // props.getAllEmployees()
+    const dataInitial=props.dataInitial
 
-            
-                const filteredData=data.filter((item)=>{
+
+    const filterEmployeeType=(e)=>{  
+        e.preventDefault()
+        console.log(data)
+        
+       const employeeType=e.target.value
+       console.log(employeeType)
+               const filteredData=dataInitial.filter((item)=>{
+                console.log(data)
                       return employeeType===""?item:
                       item.employee_type.includes(employeeType)
+
+              
             })
         setData(filteredData)
         }
-
+        console.log(data)
        
-    
+
 return(
    
     <div className="content">
@@ -31,7 +36,7 @@ return(
         
         <div className = 'input-box'>
         <div className="gender-details">
-                <select onChange={(e)=>{filterEmployeeType(e.target.value) }} >
+                <select onChange={(e)=>{filterEmployeeType(e) }} >
                     <option value="" selected="selected">All employees</option>
                     <option value="admin">Admin</option>
                     <option value="manager">Manager</option>

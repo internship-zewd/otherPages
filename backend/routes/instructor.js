@@ -1,7 +1,7 @@
 const express=require('express')
 const router=express.Router()
 const {instructor}=require('../models')
-const Mailer=require('./Components/Mailer')
+const Mailer=require('./Mailer')
 
 
 router.get('/', (req,res)=>{

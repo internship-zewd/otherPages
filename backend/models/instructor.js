@@ -58,19 +58,16 @@ module.exports=(sequelize,DataTypes)=>{
             },
         },
         
-        employment_date:{
-            type:DataTypes.DATEONLY,
-             allowNull:false,
-            validate:{
-                // notEmpty:true,
-                
-        },
-    },
 }
     ,{
         freezeTableName:true,
         tableName:'instructor',
         underscored:true
     })
+
+    instructor.associate=(models)=>{
+        instructor.hasMany(models.Class,{foreignKey:"instructorId"})
+        instructor.hasMany(models.attendance,{foreignKey:"instructorId"})
+    }
     return instructor
 }

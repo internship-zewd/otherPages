@@ -1,17 +1,18 @@
 const nodeMailer=require('nodemailer')
-require ('dotenv').config()
+require('dotenv').config()
 
 const html=`
-<h1> Hello worrld </h1>
-<p>Isnt nodemailer usefule</p>
+ Hello world 
+Isnt nodemailer useful
 `
-const Mailer=async(email)=>{
+function Mailer(email){
    const transporter=nodeMailer.createTransport({
     service:'gmail',
     secure:true,
+    port:465,
     auth:{
         user:process.env.USER,
-        pass:process.env.PASSWORD
+        pass:process.env.PASS,
     }
 })
 
@@ -19,16 +20,17 @@ const mailOptions={
     from:`Jalal Addisu <jayaddisu@gmail.com>`,
     to:email,
     subject:"This sumn bout your email ehm",
-    html:html,
+    text:html
 
 
 }
 
 transporter.sendMail(mailOptions,function(error,info){
-    if(error){console.log(error)}
-    else(console.log("Message sent:" +info.reponse))
+    if(error){
+        console.log(error)}
+    else(console.log("Message sent: " +info.reponse))
 })
 
-}
 
+}
 module.exports=Mailer
