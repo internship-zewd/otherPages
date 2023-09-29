@@ -48,7 +48,7 @@ function AllCo() {
     
             setCourseInfo(viewData)
             // console.log(response.data)
-            // console.log(courseInfo)
+             console.log(courseInfo)
             setButtonPopup(true)
         
             
@@ -139,13 +139,14 @@ function AllCo() {
         <td>{item.course_fee}</td>
         <td>{item.course_duration}</td>
         
-        <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleView(e, item.id)}}><VisibilityIcon/></button>
-                                    <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleUpdate(e, item.id)}}><EditIcon/></button>
-                                    <UpdatePopup trigger={updatePopup} setTrigger={setUpdatePopup} updateProp={courseInfo}/>
+   <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleView(e, item.id)}}><VisibilityIcon/></button>
+   <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleUpdate(e, item.id)}}><EditIcon/></button>
+                 <UpdatePopup trigger={updatePopup} setTrigger={setUpdatePopup} updateProp={courseInfo}/>
                                     
                                    <ViewPopup trigger={buttonPopup} setTrigger={setButtonPopup} courseProp={courseInfo} />
                                     
-                                    <button  className='btn btn-sm btn-danger' onClick={(e) => { handleDelete(e, item.id) }}> <DeleteIcon/></button>   </tr>
+   <button  className='btn btn-sm btn-danger' onClick={(e) => { handleDelete(e, item.id) }}> <DeleteIcon/></button>  
+    </tr>
                         
 ))}
 </tbody>

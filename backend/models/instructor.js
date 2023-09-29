@@ -57,9 +57,7 @@ module.exports=(sequelize,DataTypes)=>{
                 notEmpty:true
             },
         },
-<<<<<<< HEAD
         
-=======
         employment_date:{
             type:DataTypes.DATEONLY,
              allowNull:false,
@@ -68,7 +66,6 @@ module.exports=(sequelize,DataTypes)=>{
                 
         },
     },
->>>>>>> 8f99c5b050387a4b87b9cc323ff0db0fdf527481
 }
     ,{
         freezeTableName:true,

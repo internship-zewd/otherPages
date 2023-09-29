@@ -18,7 +18,7 @@ router.get('/', (req,res)=>{
 
 })
 router.get('/:id', (req,res)=>{
-    const course_id=req.params.id
+    const id=req.params.id
     course.findOne({where:{id:course}})
     .then(( course)=>{
     res.json( course)})
@@ -76,8 +76,8 @@ router.put('/:id',(req,res)=>{
 
 
 router.delete('/:id',(req,res)=>{
-    const course_id=req.params.id
-    course.destroy({where:{id:`${course_id}`}})       
+    const id=req.params.id
+    course.destroy({where:{id:`${id}`}})       
     .then(res.send())
     .catch((err)=>{
         if(err){
@@ -88,5 +88,19 @@ router.delete('/:id',(req,res)=>{
 
 })
 
+
+router.get('/', (req, res) => {
+  course.findAndCountAll()
+    .then(res => {
+      const count = res.length;
+       console.log('Count:', count);
+       res.json({ count });
+      
+    })
+    .catch(error => {
+      console.error('Error occurred while fetching the number of courses:', error);
+      res.status(500).json({ error: 'An error occurred while fetching the number of courses' });
+    });
+});
 
 module.exports=router;

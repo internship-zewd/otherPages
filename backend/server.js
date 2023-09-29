@@ -14,28 +14,28 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json());
 
 
-const studentRoute=require('./routes/student')
-app.use('/student',studentRoute)
-PORT=8081
-const instructorRoute=require('./routes/instructor')
-app.use(`/instructor`,instructorRoute)
+// const studentRoute=require('./routes/student')
+// app.use('/student',studentRoute)
+// PORT=8081
+// const instructorRoute=require('./routes/instructor')
+// app.use(`/instructor`,instructorRoute)
 
-const adminRoute=require("./routes/admin")
-app.use('/admin',adminRoute)
-
-
-const courseRoute=require('./routes/course')
-app.use('/course',courseRoute)
-
+// const adminRoute=require("./routes/admin")
+// app.use('/admin',adminRoute)
 
 
 const courseRoute=require('./routes/course')
 app.use('/course',courseRoute)
 
-db.sequelize.sync({alter:true}).then((req)=>{
+// const classRoute=require("./routes/classes")
+// app.use('/classes',classRoute)
+
+
+db.sequelize.sync().then((req)=>{
     app.listen(PORT,()=>{
         console.log(`app is listening on ${PORT}`)
     })} 
 ) 
 
+// {alter:true}
 

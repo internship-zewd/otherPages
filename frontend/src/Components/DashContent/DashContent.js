@@ -1,12 +1,13 @@
 import React from 'react'
 // import './DashContent.css'
+
 import {
  BarChart, Bar, Cell, XAxis, YAxis, 
  CartesianGrid, Tooltip, 
  Legend, ResponsiveContainer, 
  LineChart, Line } 
  from 'recharts';
- import {useEffect} from 'react'
+ import {useState, useEffect} from 'react'
  import axios from 'axios';
 
 
@@ -71,6 +72,39 @@ await axios.get(`http://localhost:8081/instructor`)
       
         }
 
+
+
+
+        const [courseCount, setcourseCount] = useState(0);
+
+    useEffect(() => {
+         getcourseCount();
+  }, []);
+
+const getcourseCount=async()=>{
+      await axios.get('http://localhost:8081/course') 
+      .then(res => {
+         console.log('Response data:', res.data.length);
+        // const count = ;
+         const count = parseInt(res.data.length);
+         if (!isNaN(count)) {
+              setcourseCount(count);
+             }  else {
+          console.error('Invalid response data:', res.data.length);
+        }
+      })
+      .catch(error => {
+        console.error('Error occurred while fetching the number of students:', error);
+      });
+
+    }
+
+
+ 
+      
+
+
+
   return (
    <div className="dashContent">
         <div className="overview">
@@ -83,13 +117,13 @@ await axios.get(`http://localhost:8081/instructor`)
                         <div className="box box-1">
                             <i className="uil uil-graduation-cap"></i>
                             <span className="text">Total Students</span>
-                            <span className="number">400</span>
+                            <span className="number">23</span>
                         </div>
 
                         <div className="box box2">
                             <i className="uil uil-books"></i>
                             <span className="text">Total Courses</span>
-                            <span className="number">23</span>
+                            <span className="number">{courseCount}</span>
                         </div>
 
                         <div className="box box3">

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const course = sequelize.define("course", {
+    const classes = sequelize.define("classes", {
        id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         // allowNull: false,
       },
-        course_name: {
+        classes_name: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -18,20 +18,25 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
 
-        course_fee: {
-            type: DataTypes.DECIMAL,
+        course_id:{
+            type:DataTypes.INTEGER,
+            allowNull:false
+        },
+
+        course: {
+            type: DataTypes.STRING,
             allowNull: false,
-            
             validate: {
                 notEmpty: true,
-                
+           
             },
         },
-        course_duration: {
-            type: DataTypes.INTEGER,
+        insructor: {
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                notEmpty: true
+                notEmpty: true,
+           
             },
         },
         
@@ -43,13 +48,13 @@ module.exports = (sequelize, DataTypes) => {
        
 },{
     freezeTableName:true,
-    tableName:'course',
+    tableName:'classes',
     underscored:true
 
 })
-course.associate = (models) => {
-    course.hasMany(models.student, { foreignKey: 'course_id' });
-    course.hasMany(models.classes, { foreignKey: 'course_id' });
+classes.associate = (models) => {
+   classes.belongsTo(models.course, { foreignKey: 'course_id' ,as:'classes_course'});
+  
   };
-return course
+return classes
 }
