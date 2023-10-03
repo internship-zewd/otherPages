@@ -55,5 +55,5 @@ course.associate = (models) => {
     course.hasMany(models.student, { foreignKey: 'course_id' });
     course.hasMany(models.classs,{foreignKey:"course_id"})
   };
-return course
+return courses
 }
