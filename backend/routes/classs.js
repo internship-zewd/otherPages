@@ -6,7 +6,7 @@ const {getOneClass}=require("../controllers/classs")
 router.get("/getAll",getAllClass)
 
 router.get("/getOne/:id",getOneClass)
-router.get('/getByCourse',getByCourse)
+router.get('/getByCourse/:id',getByCourse)
 
 
 module.exports=router;

@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty:true,
             },
         },
-        name: {
+        course_name: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
 
-        tuition_fee: {
+        fee: {
             type: DataTypes.DECIMAL,
             allowNull: false,
             validate: {
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
                 isEmail: true,
             },
         },
-        duration: {
+        course_duration: {
             type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
@@ -55,5 +55,5 @@ course.associate = (models) => {
     course.hasMany(models.student, { foreignKey: 'course_id' });
     course.hasMany(models.classs,{foreignKey:"course_id"})
   };
-return courses
+return course
 }

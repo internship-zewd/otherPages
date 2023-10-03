@@ -34,7 +34,8 @@ const getOneClass=(req,res)=>{
         }
     })
 }
-const getByCourse=async(req,res)=>{
+const getByCourse=(req,res)=>{
+    console.log("Im in here")
 
     const {id}=req.params
     classs.findAll({where:{course_id:id}})

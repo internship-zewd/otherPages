@@ -35,22 +35,28 @@ function AddSt () {
         })
     }
 
+  
+
     const getClass=async(id)=>{
-        await axios.get(`http://localhost:8081/class/getByCourse/${id}`)
+        console.log("Im in here")
+        console.log(id)
+        await axios.get(`http://localhost:8081/classs/getByCourse/${id}`)
         .then((res)=>{
             setClassFetched(res.data)
-        console.log(res)
+        console.log(res.data)
     
     })
 .catch((err)=>{
     if(err){console.log(err)}
 })}
-    const handleCourse=(e)=>{
-        setCourse(e)
-        getClass(e)
 
-    }
+const handleCourse=(e)=>{
+    setCourse(e)
+    getClass(e)
 
+}
+
+    
     let handleSubmit = async(e) => {
         e.preventDefault();
         let validationErrors = {}
@@ -193,7 +199,7 @@ function AddSt () {
                                     <select required onChange={(e)=>{setClasss(e.target.value )}} name="classs">
                                     <option value={null} selected='selected'>Select Class</option>
                                     {classFetched.map((clas)=>(
-                                         <option value={clas.id}>{clas.name}</option>
+                                         <option value={clas.id}>{clas.full_identification}</option>
 
                                     ))}
                                       </select>

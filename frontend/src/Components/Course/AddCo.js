@@ -42,7 +42,7 @@ function AddCo() {
         if(Object.keys(validationErrors).length===0){
 
         return await axios
-        .post("http://localhost:8081/course",{courseName,fee,duration})
+        .post("http://localhost:8081/course/create",{courseName,fee,duration})
         .then((res)=>{console.log(res)})
         .catch((err)=>{
             if(err){
