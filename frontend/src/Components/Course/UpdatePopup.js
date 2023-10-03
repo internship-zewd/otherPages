@@ -1,7 +1,7 @@
 import '../DashContent/DashContent.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import './Popup.css';
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import axios from 'axios';
 
 
@@ -13,6 +13,9 @@ export const UpdatePopup=(props)=>{
     const setTrigger=props.setTrigger
     const updateProp=props.updateProp
     const id=updateProp.id
+    const course_name=updateProp.course_name
+    const course_fee=updateProp.course_fee
+    const course_duration=updateProp.course_duration
 
     const [courseName, setCoursename]=useState(updateProp.course_name)
     const [fee, setFee]=useState(updateProp.course_fee);
@@ -20,21 +23,68 @@ export const UpdatePopup=(props)=>{
     const [errors,setErrors]=useState({})
     
    
-// console.log(updateProp.id)
+//  console.log(updateProp.id)
+useEffect(()=>{
+       
+        setCoursename(course_name)
+        setFee(course_fee)
+        setDuration(course_duration)
+        
+
+    },[course_name,course_fee, course_duration])
+   
 
 
 const handleSubmit=async(e)=>{
-    //  e.preventDefault()
-    await axios.put(`http://localhost:8081/course/${id}`,{courseName,fee,duration} )
+     e.preventDefault()
+     console.log(course_name)
+    console.log(courseName)
+// console.log(`this is the val ${first_name}  ${firstName}`)
+console.log(`${courseName}===${updateProp.course_name}`)
+// console.log(email+_email)
+//     console.log(course_name+employeeType)
+    if (courseName===course_name){
+
+        console.log("im in here ")
+        await axios.put(`http://localhost:8081/${course_name}/${id}`,{courseName,fee,duration} )
+        .then((res)=>{
+            console.log(res.data)
+            console.log("we're in put router ")
+        })
+        .catch((err)=>{
+            if(err){
+                console.log(err)
+            }
+        })
+        
+        }
+        else{
+            console.log(courseName)
+         await axios.post(`http://localhost:8081/${courseName}`,{courseName,fee,duration} )
     .then((res)=>{
+
         console.log(res.data)
+        console.log("we're in post hshahaa")
+        console.log(`the ${course_name} id is ${id}`)
     })
     .catch((err)=>{
         if(err){
             console.log(err)
         }
     })
-}
+    
+        await axios.delete(`http://localhost:8081/${updateProp.course_name}/${id}`)
+        .then((res)=>{
+            console.log('removed successfully')
+        })
+        .catch((err)=>{
+            if(err){
+                console.log(err)
+            }
+        
+        })
+    }
+    } 
    return(props.trigger)?(
 
    
