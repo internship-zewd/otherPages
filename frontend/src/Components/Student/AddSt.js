@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import '../DashContent/DashContent.css'
 import validator from 'validator'
-import './Addst.css'
+// import './Addst.css'
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 function AddSt () {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -214,8 +214,8 @@ function AddSt () {
                                 </div>
 
 
-                                <button className="btn btn-warning"
-                                    type="submit" onChange={handleSubmit}
+                                <button 
+                                    type="submit" className='btnForAll' onChange={handleSubmit}
 
                                 >Register</button>
 

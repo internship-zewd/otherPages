@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../DashContent/DashContent.css'
 import axios from 'axios';
 import "./AddEm.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 // import validator from 'validator';
 
 function  AddEm () {

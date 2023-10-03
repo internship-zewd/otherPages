@@ -222,7 +222,11 @@
     margin-left: 10px;
 }
 
-.btn{
+.btnForAll{
     
-    
+    height: 45px;
+    width: 100px;
+    float: right;
+    clear: both;
+    border: 2px solid black
 }
