@@ -5,7 +5,7 @@ export const ViewPopup=(props)=> {
 
   const employeeProp=props.employeeProp
   const setTrigger=props.setTrigger
-  // console.log(employeeProp)
+  console.log(employeeProp)
   // const type=data.employee_type
 
   
@@ -18,7 +18,7 @@ export const ViewPopup=(props)=> {
       <h3>{employeeProp.employee_type}'s email:</h3><p> {employeeProp.email}</p>
       <h3>{employeeProp.employee_type}'s phone:</h3><p> {employeeProp.phone}</p>
       <h3>{employeeProp.employee_type}'s salary:</h3><p> {employeeProp.salary}</p>
-      <h3>{employeeProp.employee_type}'s employment date:</h3><p> {employeeProp.employment_date}</p>
+      <h3>{employeeProp.employee_type}'s employment date:</h3><p> {employeeProp.createdAt}</p>
     <button className="close-btn" onClick={()=>{setTrigger(false)}}>close</button>
     {props.children}
     </div>

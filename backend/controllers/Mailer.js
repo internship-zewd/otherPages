@@ -33,4 +33,4 @@ transporter.sendMail(mailOptions,function(error,info){
 
 
 }
-module.exports=Mailer
+module.exports= {Mailer}

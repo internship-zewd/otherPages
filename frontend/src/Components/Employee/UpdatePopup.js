@@ -64,9 +64,10 @@ console.log(email+_email)
     if (employeeType===employee_type){
 
         console.log("im in here ")
-        await axios.put(`http://localhost:8081/${employee_type}/${id}`,{firstName,middleName,lastName,email,password,phone,salary,date} )
+        await axios.put(`http://localhost:8081/${employee_type}/update/${id}`,{firstName,middleName,lastName,email,password,phone,salary,date} )
         .then((res)=>{
             console.log(res.data)
+            setTrigger(false)
             console.log("we're in put router ")
         })
         .catch((err)=>{
@@ -78,10 +79,11 @@ console.log(email+_email)
         }
         else{
             console.log(employeeType)
-         await axios.post(`http://localhost:8081/${employeeType}`,{firstName,middleName,lastName,email,password,phone,salary,date} )
+         await axios.post(`http://localhost:8081/${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary,date} )
     .then((res)=>{
 
         console.log(res.data)
+        setTrigger(false)
         console.log("we're in post hshahaa")
         console.log(`the ${employee_type} id is ${id}`)
     })
@@ -91,7 +93,7 @@ console.log(email+_email)
         }
     })
     
-        await axios.delete(`http://localhost:8081/${updateProp.employee_type}/${id}`)
+        await axios.delete(`http://localhost:8081/${updateProp.employee_type}/delete${id}`)
         .then((res)=>{
             console.log('removed successfully')
         })

@@ -4,7 +4,20 @@ module.exports = (sequelize, DataTypes) => {
             type:DataTypes.INTEGER,
             autoIncrement:true,
             primaryKey:true,
-
+        },
+        id_tag:{
+            type: DataTypes.STRING,
+            allowNull:false,
+            validate:{
+                notEmpty:true
+            },
+        },
+        full_identification:{
+            type:DataTypes.STRING,
+            allowNull:true,
+            validate:{
+                notEmpty:true,
+            },
         },
         name: {
             type: DataTypes.STRING,
@@ -40,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
 })
 course.associate = (models) => {
     course.hasMany(models.student, { foreignKey: 'course_id' });
-    course.hasMany(models.Class,{foreignKey:"courseId"})
+    course.hasMany(models.classs,{foreignKey:"course_id"})
   };
 return course
 }

@@ -4,15 +4,37 @@ module.exports = (sequelize, DataTypes) => {
             type:DataTypes.INTEGER,
             allowNull:false
         },
-        attendanceId:{
+        class_id:{
             type:DataTypes.INTEGER,
             allowNull:false
+
+
         },
-        username: {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        id_tag:{
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: true
+            allowNull:false,
+            validate:{
+                notEmpty:true
+            },
+        },
+
+        full_identification:{
+            type:DataTypes.STRING,
+            allowNull:true,
+            validate:{
+                notEmpty:true,
+            },
+        },
+        full_name:{
+            type:DataTypes.STRING,
+            allowNull:false,
+            validate:{
+                notEmpty:true,
             },
         },
         email: {
@@ -45,29 +67,6 @@ module.exports = (sequelize, DataTypes) => {
 
             },
         },
-        admission_date: {
-            type: DataTypes.DATEONLY,
-            allowNull:false,
-            validate: {
-                notEmpty: true
-            },
-        },
-        course: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: true,
-           
-            },
-        },
-        classs: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: true,
-
-            },
-        },
 
         dob: {
             type: DataTypes.DATEONLY,
@@ -75,15 +74,7 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                // notEmpty: true,
             },
-        },
-        registno:{
-        type: DataTypes.DECIMAL,
-        allowNull: false,
-        validate: {
-            notEmpty: true
-        },
-    },
-        
+        }, 
        
 },{
     freezeTableName:true,
@@ -92,9 +83,9 @@ module.exports = (sequelize, DataTypes) => {
 
 })
 student.associate = (models) => {
-    student.belongsTo(models.course, { foreignKey: 'course_id' ,as:'student_course'});
-    student.belongsTo(models.Class,{foreignKey:"classId"})
-    student.belongsTo(models.attendance,{foreignKey:"attendanceId"})
+    student.belongsTo(models.course, { foreignKey: 'course_id' ,as:'student_course'})
+    student.belongsTo(models.classs, {foreignKey:"class_id"})
+    student.hasMany(models.attendance,{foreignKey:"student_id"})
 
 
 

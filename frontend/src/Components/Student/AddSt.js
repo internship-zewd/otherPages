@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import '../DashContent/DashContent.css'
 import validator from 'validator'
 import './Addst.css'
@@ -17,6 +17,39 @@ function AddSt () {
     const [registno, setRegistno] = useState('');
     const [errors, setErrors] = useState('');
     const[transcript,setTranscript]=useState(null)
+    const[classFetched,setClassFetched]=useState([]);
+    const [courseFetched,setCourseFetched]=useState([])
+
+    useEffect(()=>{
+        getCourse()
+    },[])
+
+    const getCourse=async()=>{
+        await axios.get("http://localhost:8081/course/getAll")
+        .then((res)=>{
+            console.log(res.data)
+            setCourseFetched(res.data)
+        })
+        .catch((err)=>{
+            if(err){console.log(err)}
+        })
+    }
+
+    const getClass=async(id)=>{
+        await axios.get(`http://localhost:8081/class/getByCourse/${id}`)
+        .then((res)=>{
+            setClassFetched(res.data)
+        console.log(res)
+    
+    })
+.catch((err)=>{
+    if(err){console.log(err)}
+})}
+    const handleCourse=(e)=>{
+        setCourse(e)
+        getClass(e)
+
+    }
 
     let handleSubmit = async(e) => {
         e.preventDefault();
@@ -34,20 +67,6 @@ function AddSt () {
         }else if(username.length>45){
             validationErrors.username="Estudent's fullname should be less than 45 characters"
         }
-        // if(!middleName.trim()){
-        //     validationErrors.middleName="Fill in the employee's middle name"
-        // }else if(middleName.length<3){
-        //     validationErrors.middleName="Employee's middle name is supposed to be atleast 3 characters"
-        // }else if(middleName.length>15){
-        //     validationErrors.middleName="Employee's middle name should be less than 16 characters"
-        // }
-        // if(!lastName.trim()){
-        //     validationErrors.lastName="Fill in the employee's last name"
-        // }else if(lastName.length<3){
-        //     validationErrors.lastName="Employee's last name is supposed to be atleast 3 characters"
-        // }else if(lastName.length>15){
-        //     validationErrors.lastName="Employee's last name should be less than 16 characters"
-        // }
         if(!email.trim()){
             validationErrors.email="Fill in student's email"
         }else if(!regEmail.test(email)){
@@ -152,12 +171,17 @@ function AddSt () {
                                 <div className="input-box">
 
                                     <span className="details">Course</span>
-                                    <select required onChange={(e)=>{setCourse(e.target.value )}} name="course">
                                     <option value={null} selected='selected'>Select Course</option>
-                                    <option value='graphic-design'>Graphic design</option>
-                                        <option value='digital-marketing'>Digital marketing</option>
-                                        <option value='photography'>Photography</option>
-                                        <option value='animation'>Animation and motion design</option>
+                                    <select required onChange={(e)=>{handleCourse(e.target.value)}} name="course">
+                                        {
+                                        courseFetched.map((cors)=>(
+
+                                            <option value={cors.id}>{cors.name}</option>
+
+                                        )
+                                   
+                                        )}                                   
+        
                                     </select>
                                     <div className="errors">{errors.course}<br/></div>
 
@@ -167,25 +191,21 @@ function AddSt () {
 
                                     <span className="details">Class</span>
                                     <select required onChange={(e)=>{setClasss(e.target.value )}} name="classs">
-                                        <option value={null} selected='selected'>Select Class</option>
-                                        <option value="a">A</option>
-                                        <option value="b">B</option>
-                                        <option value="b">C</option>
-                                    </select>
-                                    <div className="errors">{errors.class}<br/></div>
-                                </div>
+                                    <option value={null} selected='selected'>Select Class</option>
+                                    {classFetched.map((clas)=>(
+                                         <option value={clas.id}>{clas.name}</option>
 
-                                <div className="input-box">
-                                    <span className="details">Transcript</span>
-                                    <input type="file" accept="file/*" required value={transcript} onChange={(e)=>{setTranscript(e.target.value )}}/>
-                                    <div className="errors">{errors.transcript}<br/></div>
+                                    ))}
+                                      </select>
+                                    
+                                    <div className="errors">{errors.class}<br/></div>
                                 </div>
 
                                 <div className="input-box">
                                     <div className="gender-details">
                                         <span className="details">Payment Status</span>
                                         <select required onChange={(e)=>{setPaymentStatus(e.target.value )}} name="paymentStatus">
-                                            <option value={null}>select student's payment status</option>
+                                            <option value={null}>select one</option>
                                             <option value="half">Half_Paid</option>
                                             <option value="full">Full_Paid</option>
                                             <option value="unpaid">Unpaid</option>
@@ -201,21 +221,8 @@ function AddSt () {
                                     <div className="errors">{errors.dob}<br/></div>
                                 </div>
 
-                                <div className="input-box">
-                                    <span className="details">Admission Date</span>
-                                    <input type="date" placeholder="" id="Date" name="admissionDate"  required onChange={(e)=>{setAdmissionDate(e.target.value )}} />
-                                    <div className="errors">{errors.admissionDate}<br/></div>
-                                </div>
-
-                                <div className="input-box">
-                                    <span className="details">Registration Number</span>
-                                    <input type="text" placeholder="Registration Number" name="registno"  required maxlength="10" onChange={(e)=>{setRegistno(e.target.value )}} />
-                                    <div className="errors">{errors.registNo}<br/></div>
-                                </div>
-
-
-                                <button className="btn btn-warning"
-                                    type="submit" onChange={handleSubmit}
+                                <button className="btn btn-warning button"
+                                    type="submit"  onChange={handleSubmit}
 
                                 >Register</button>
 

@@ -89,7 +89,7 @@ function  AddEm () {
             console.log(firstName+middleName+lastName+email+password+phone+salary+date+course)
 
         return await axios
-        .post(`http://localhost:8081/${employeeType}`,{firstName,middleName,lastName,email,password,phone,salary,date,course})
+        .post(`http://localhost:8081/${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary,date,course})
         .then((res)=>{console.log(res)})
         .catch((err)=>{
             if(err){

@@ -66,8 +66,8 @@ module.exports=(sequelize,DataTypes)=>{
     })
 
     instructor.associate=(models)=>{
-        instructor.hasMany(models.Class,{foreignKey:"instructorId"})
-        instructor.hasMany(models.attendance,{foreignKey:"instructorId"})
+        instructor.hasMany(models.classs,{foreignKey:"instructor_id"})
+        instructor.hasMany(models.attendance,{foreignKey:"instructor_id"})
     }
     return instructor
 }

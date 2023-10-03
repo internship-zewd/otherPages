@@ -10,7 +10,7 @@ import axios from 'axios'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {getAllEmployees} from './getAllEmployees'
+// import {getAllEmployees} from './getAllEmployees'
 
 function AllEm() {
 
@@ -35,8 +35,8 @@ function AllEm() {
        },[])
        const getAllEmployees=async()=>{
         
-        const instructor=await axios.get('http://localhost:8081/instructor')
-        const admin=await axios.get('http://localhost:8081/admin')
+        const instructor=await axios.get('http://localhost:8081/instructor/getAll')
+        const admin=await axios.get('http://localhost:8081/admin/getAll')
         await axios.all([instructor,admin])
         .then( 
            axios.spread((...allData)=>{
@@ -77,7 +77,7 @@ function AllEm() {
     const handleView=async(e,id,employee)=>{
         // e.preventDefault();
         console.log(employeeInfo)
-        return await axios.get(`http://localhost:8081/${employee}/${id}`)
+        return await axios.get(`http://localhost:8081/${employee}/getOne/${id}`)
         .then((response)=>{
     
             const viewData=response.data
@@ -98,7 +98,7 @@ function AllEm() {
     const handleUpdate=async(e,id,employee)=>{
     
         
-        await axios.get(`http://localhost:8081/${employee}/${id}`)
+        await axios.get(`http://localhost:8081/${employee}/update/${id}`)
         .then((response)=>{
             setEmployeeInfo(response.data)
             console.log(response.data)
@@ -117,7 +117,7 @@ function AllEm() {
     const handleDelete=async(e,id,employee)=>{
 
            
-    await axios.delete(`http://localhost:8081/${employee}/${id}`)
+    await axios.delete(`http://localhost:8081/${employee}/delete/${id}`)
     .then((res)=>{console.log("deleted"+ res)})
     window.location.reload()
     

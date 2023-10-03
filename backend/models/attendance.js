@@ -2,19 +2,25 @@ module.exports=(sequelize,DataTypes)=>{
     const attendance=sequelize.define("attendance",{
         id:{
             type:DataTypes.INTEGER,
-            autoIncremnt:true,
+            autoIncrement:true,
             primaryKey:true,
 
         },
-        classId:{
+        class_id:{
             type:DataTypes.INTEGER,
             allowNull:false,
 
         },
-        day:{
+        student_id: {
             type:DataTypes.INTEGER,
-            autoIncremnt:true,
             allowNull:false,
+
+        },
+        idTagValue:{
+            type:DataTypes.STRING,
+            allowNull:false,
+
+
         },
         
         mark_attendance:{
@@ -27,6 +33,7 @@ module.exports=(sequelize,DataTypes)=>{
         },
 
 
+
     },{
         freezeTableName:true,
         tableName:"attendance",
@@ -36,8 +43,9 @@ module.exports=(sequelize,DataTypes)=>{
     }
     )
     attendance.associate=(models)=>{
-        attendance.hasMany(models.student,{foreignKey:"attendanceId"})
-        attendance.belongsTo(models.Class,{foreignKey:"classId"})
+        attendance.belongsTo(models.student,{foreignKey:"student_id"})
+        attendance.belongsTo(models.classs,{foreignKey:"class_id"})
+        attendance.belongsTo(models.instructor,{foreignKey:"instructor_id"})
 
     }
 return attendance;
