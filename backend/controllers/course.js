@@ -27,11 +27,18 @@ const getAllCourse=(req,res)=>{
     
     }
 
-    const createCourse=(req,res)=>{
+    const createCourse=async(req,res)=>{
+        console.log("Imherrrrr")
         const {courseName,fee,duration}=req.body
+        const previousId=await course.max('id');
+        const idTag=previousId!==null?`CRS${1000+previousId}`:`CRS${1000}`
+        const fullIdentification=idTag+" "+ courseName
+           
         course.create({
+         id_tag:idTag,
+         full_Identification:fullIdentification,
          course_name : courseName,
-         course_fee : fee,
+         fee : fee,
          course_duration :duration
          
             
