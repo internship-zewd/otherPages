@@ -55,11 +55,11 @@ const createStudent=async(req,res)=>{
         full_name:fullName,
         full_identification:fullIdentification,
         email:email,
-         phonenumber :phonenumber,
-         gender : gender,
-         course : course,
-         paymentStatus : paymentStatus,
-         dob : dob,
+        phonenumber :phonenumber,
+        gender : gender,
+        course : course,
+        paymentStatus : paymentStatus,
+        dob : dob,
         
             
         })

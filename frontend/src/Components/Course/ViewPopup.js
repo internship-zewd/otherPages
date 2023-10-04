@@ -13,22 +13,30 @@ export const ViewPopup=(props)=> {
   return props.trigger ? (
     <div className="popup">
       <div className="popup-inner">
-        <h3>Course's Id:</h3>
-        <p> {courseProp.id}</p>
-        <h3>Course's Name</h3>
+        <h5>Course's Id:</h5>
+        <p> {courseProp.id_tag}</p>
+        <h5>Course's Name:</h5>
         <p> {courseProp.course_name} </p>
-        <h3>Course's Tuition fee</h3>
+        <h5>Course's Tuition fee:</h5>
         <p> {courseProp.fee} </p>
-        <h3>Course's Duration in days</h3>
+        <h5>Course's Duration in days:</h5>
         <p> {courseProp.course_duration} </p>
 
         <button
-          className="close-btn"
+          className="close-btn  btn btn-secondary"
           onClick={() => {
             setTrigger(false);
           }}
         >
           close
+        </button>
+        <button
+          className="print-btn btn btn-warning"
+          // onClick={() => {
+          //   setTrigger(false);
+          // }}
+        >
+          print
         </button>
         {props.children}
       </div>

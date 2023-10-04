@@ -1,5 +1,5 @@
-import './Popup.css';
 import {React} from 'react';
+// import "../../css/Popup.css";
 export const ViewPopup=(props)=> {
 
 
@@ -10,19 +10,45 @@ export const ViewPopup=(props)=> {
 
   
 
-  return (props.trigger)?(
-    <div className='popup'>
-    <div className="popup-inner">
-      <h3>{employeeProp.employee_type}'s Id:</h3><p> {employeeProp.id_tag}</p>
-      <h3>{employeeProp.employee_type}'s name:</h3><p> {employeeProp.first_name} {employeeProp.middle_name} {employeeProp.last_name}</p>
-      <h3>{employeeProp.employee_type}'s email:</h3><p> {employeeProp.email}</p>
-      <h3>{employeeProp.employee_type}'s phone:</h3><p> {employeeProp.phone}</p>
-      <h3>{employeeProp.employee_type}'s salary:</h3><p> {employeeProp.salary}</p>
-      <h3>{employeeProp.employee_type}'s employment date:</h3><p> {employeeProp.createdAt}</p>
-    <button className="close-btn" onClick={()=>{setTrigger(false)}}>close</button>
-    {props.children}
+  return props.trigger ? (
+    <div className="popup">
+      <div className="popup-inner">
+        <h5>{employeeProp.employee_type}'s Id: </h5>
+        <p> {employeeProp.id_tag}</p>
+        <h5>{employeeProp.employee_type}'s name: </h5>
+        <p>
+          {" "}
+          {employeeProp.first_name} {employeeProp.middle_name}{" "}
+          {employeeProp.last_name}
+        </p>
+        <h5>{employeeProp.employee_type}'s email:</h5>
+        <p> {employeeProp.email}</p>
+        <h5>{employeeProp.employee_type}'s phone:</h5>
+        <p> {employeeProp.phone}</p>
+        <h5>{employeeProp.employee_type}'s salary:</h5>
+        <p> {employeeProp.salary}</p>
+        <h5>{employeeProp.employee_type}'s employment date:</h5>
+        <p> {employeeProp.createdAt}</p>
+        <button
+          className="close-btn btn btn-secondary"
+          onClick={() => {
+            setTrigger(false);
+          }}
+        >
+          close
+        </button>
+        <button
+          className="print-btn btn btn-warning"
+          // onClick={() => {
+          //   setTrigger(false);
+          // }}
+        >
+          print
+        </button>
+        {props.children}
+      </div>
     </div>
-    </div>
-    
-  ):"";
+  ) : (
+    ""
+  );
 };
