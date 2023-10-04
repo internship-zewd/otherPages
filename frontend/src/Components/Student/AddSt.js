@@ -227,7 +227,7 @@ const handleCourse=(e)=>{
                                     <div className="errors">{errors.dob}<br/></div>
                                 </div>
 
-                                <button className="btn btn-warning button"
+                                <button className="btn btn-warning btnForAll"
                                     type="submit"  onChange={handleSubmit}
 
                                 >Register</button>

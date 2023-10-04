@@ -174,7 +174,7 @@ function AddCo() {
 
               <button
                 type="submit"
-                className="btn btn-warning"
+                className="btn btn-warning btnForAll"
                 name="submit"
                 onChange={handleSubmit}
               >

@@ -134,7 +134,7 @@ function AllCo() {
     
 
     <tr key={item.id}>
-        <td>{item.id}</td>
+        <td>{item.id_tag}</td>
         <td>{item.course_name}</td>
         <td>{item.fee}</td>
         <td>{item.course_duration}</td>

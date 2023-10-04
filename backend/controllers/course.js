@@ -29,31 +29,31 @@ const getOneCourse = (req, res) => {
     });
 };
 
-    const createCourse=async(req,res)=>{
-        console.log("Imherrrrr")
-        const {courseName,fee,duration}=req.body
-        const previousId=await course.max('id');
-        const idTag=previousId!==null?`CRS${1000+previousId}`:`CRS${1000}`
-        const fullIdentification=idTag+" "+ courseName
-           
-        course.create({
-         id_tag:idTag,
-         full_Identification:fullIdentification,
-         course_name : courseName,
-         fee : fee,
-         course_duration :duration
-         
-            
-        })
-        .then((res)=>{
-            console.log(res) 
-        })
-        .catch((err)=>{
-            if(err){
-                console.log(err)
-            }})
-            res.send('insert');
-    }
+const createCourse = async (req, res) => {
+  console.log("Imherrrrr");
+  const { courseName, fee, duration } = req.body;
+  const previousId = await course.max("id");
+  const idTag = previousId !== null ? `CRS${1000 + previousId}` : `CRS${1000}`;
+  const fullIdentification = idTag + " " + courseName;
+
+  course
+    .create({
+      id_tag: idTag,
+      full_Identification: fullIdentification,
+      course_name: courseName,
+      fee: fee,
+      course_duration: duration,
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+  res.send("insert");
+};
 
 const updateCourse = (req, res) => {
   const { course, fee, duration } = req.body;
@@ -93,15 +93,11 @@ const deleteCourse = (req, res) => {
 const countCourse = async (req, res) => {
   try {
     const count = await course.count();
-    res.json(count)
-
+    res.json(count);
   } catch (error) {
     console.log(error);
   }
-  
 };
-
-
 
 module.exports = {
   getAllCourse,
