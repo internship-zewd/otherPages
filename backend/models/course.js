@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         id_tag:{
             type: DataTypes.STRING,
-            allowNull:false,
+            allowNull:true,
             validate:{
                 notEmpty:true
             },
@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             validate: {
                 notEmpty: true,
-                isEmail: true,
+                
             },
         },
         duration: {

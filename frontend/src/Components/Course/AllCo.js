@@ -28,7 +28,7 @@ function AllCo() {
     
     const getCourse=async()=>{
     
-        await axios.get('http://localhost:8081/course')
+        await axios.get('http://localhost:8081/course/getAll')
         .then((res)=>{
             
             setData(res.data)
@@ -67,7 +67,7 @@ function AllCo() {
         .then((response)=>{
             setCourseInfo(response.data)
             // console.log(response.data)
-            console.log(courseInfo.course_name)
+            console.log(courseInfo.name)
             setUpdatePopup(true)
         })
         .catch((err)=>{
@@ -135,9 +135,9 @@ function AllCo() {
 
     <tr key={item.id}>
         <td>{item.id}</td>
-        <td>{item.course_name}</td>
-        <td>{item.course_fee}</td>
-        <td>{item.course_duration}</td>
+        <td>{item.name}</td>
+        <td>{item.tuition_fee}</td>
+        <td>{item.duration}</td>
         
    <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleView(e, item.id)}}><VisibilityIcon/></button>
    <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleUpdate(e, item.id)}}><EditIcon/></button>

@@ -6,10 +6,10 @@ const cors= require('cors')
 const app= express();
 PORT=8081
 
-const corsOptions={
-    origin:'http://localhost:3001'
-}
-app.use(cors(corsOptions));
+// const corsOptions={
+//     origin:'http://localhost:3001'
+// }
+app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json());
 
