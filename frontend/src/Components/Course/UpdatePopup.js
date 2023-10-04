@@ -46,7 +46,7 @@ console.log(`${courseName}===${updateProp.course_name}`)
     if (courseName===course_name){
 
         console.log("im in here ")
-        await axios.put(`http://localhost:8081/${course_name}/${id}`,{courseName,fee,duration} )
+        await axios.put(`http://localhost:8081/course/update/${id}`,{courseName,fee,duration} )
         .then((res)=>{
             console.log(res.data)
             console.log("we're in put router ")
@@ -60,7 +60,7 @@ console.log(`${courseName}===${updateProp.course_name}`)
         }
         else{
             console.log(courseName)
-         await axios.post(`http://localhost:8081/${courseName}`,{courseName,fee,duration} )
+         await axios.post(`http://localhost:8081/course/create`,{courseName,fee,duration} )
     .then((res)=>{
 
         console.log(res.data)
@@ -73,7 +73,7 @@ console.log(`${courseName}===${updateProp.course_name}`)
         }
     })
     
-        await axios.delete(`http://localhost:8081/${updateProp.course_name}/${id}`)
+        await axios.delete(`http://localhost:8081/course/delete/${id}`)
         .then((res)=>{
             console.log('removed successfully')
         })

@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty:true,
             },
         },
-        name: {
+        course_name: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -27,15 +27,14 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
 
-        tuition_fee: {
+        fee: {
             type: DataTypes.DECIMAL,
             allowNull: false,
             validate: {
                 notEmpty: true,
-                
             },
         },
-        duration: {
+        course_duration: {
             type: DataTypes.INTEGER,
             allowNull: false,
             validate: {

@@ -41,7 +41,7 @@ function AllCo() {
     }
     const handleView=async(e,id)=>{
         // e.preventDefault();
-        return await axios.get(`http://localhost:8081/course/${id}`)
+        return await axios.get(`http://localhost:8081/course/getOne/${id}`)
         .then((response)=>{
     
             const viewData=response.data
@@ -63,7 +63,7 @@ function AllCo() {
     const handleUpdate=async(e,id)=>{
     
         // e.preventDefault(); 
-        await axios.get(`http://localhost:8081/course/${id}`)
+        await axios.get(`http://localhost:8081/course/update/${id}`)
         .then((response)=>{
             setCourseInfo(response.data)
             // console.log(response.data)
@@ -81,7 +81,7 @@ function AllCo() {
     }
     const handleDelete=async(e,id)=>{
            
-    await axios.delete(`http://localhost:8081/course/${id}`)
+    await axios.delete(`http://localhost:8081/course/delete/${id}`)
     .then((res)=>{console.log("deleted"+ res)
     console.log(res)})
     window.location.reload()

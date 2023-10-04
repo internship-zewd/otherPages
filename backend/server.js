@@ -27,8 +27,8 @@ app.use('/admin',adminRoute)
 const courseRoute=require('./routes/course')
 app.use('/course',courseRoute)
 
-const classRoute=require("./routes/classes")
-app.use('/classes',classRoute)
+const classRoute=require("./routes/classs")
+app.use('/classs',classRoute)
 
 
 db.sequelize.sync({alter:true}).then((req)=>{
