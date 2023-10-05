@@ -23,7 +23,7 @@
 }
 .popup-inner h5{
     color: var(--text-color);
-    display: inline-block;
+    /* display: inline-block; */
     float: left;
     clear: left;
     text-transform: capitalize;
@@ -32,7 +32,7 @@
 
 .popup-inner p {
     color: var(--text-color);
-    display: inline-block;
+    /* display: inline-block; */
     float: left;
     /* clear: both; */
 }
@@ -46,7 +46,7 @@
     float: right;
     clear: both;
     /* border: 1px solid black */
-    
+    background-color: var(--darker-color);
 }
 
 .print-btn {
