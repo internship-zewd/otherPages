@@ -14,13 +14,13 @@ export const ViewPopup=(props)=> {
     
     <div className="popup-overlay">
         <div className="popup-content">
-      <h2> Id:</h2> {studentProp.id}
-      <h2> Full Name:</h2> {studentProp.username} 
-      <h2> Email:</h2> {studentProp.email}
-      <h2> Phone Number:</h2> {studentProp.phonenumber}
-      <h2> Course:</h2> {studentProp.course}
-      <h2> Payment Status:</h2> {studentProp.paymentStatus}
-      <h2> Admission Date:</h2> {studentProp.addmitiondate}
+      <h5> Id:</h5> {studentProp.id}
+      <h5> Full Name:</h5> {studentProp.username} 
+      <h5> Email:</h5> {studentProp.email}
+      <h5> Phone Number:</h5> {studentProp.phonenumber}
+      <h5> Course:</h5> {studentProp.course}
+      <h5> Payment Status:</h5> {studentProp.paymentStatus}
+      <h5> Admission Date:</h5> {studentProp.addmitiondate}
       <br/>
     <button className="btn btn-info btn-block" onClick={()=>{setTrigger(false)}}>close</button>
     {props.children}

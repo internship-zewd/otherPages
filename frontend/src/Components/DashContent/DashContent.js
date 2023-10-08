@@ -82,11 +82,11 @@ await axios.get(`http://localhost:8081/instructor`)
   }, []);
 
 const getcourseCount=async()=>{
-      await axios.get('http://localhost:8081/course') 
+      await axios.get('http://localhost:8081/course/count') 
       .then(res => {
-         console.log('Response data:', res.data.length);
-        // const count = ;
-         const count = parseInt(res.data.length);
+         console.log('Response data:', res.data);
+       
+         const count = parseInt(res.data);
          if (!isNaN(count)) {
               setcourseCount(count);
              }  else {
@@ -94,7 +94,7 @@ const getcourseCount=async()=>{
         }
       })
       .catch(error => {
-        console.error('Error occurred while fetching the number of students:', error);
+        console.error('Error occurred while fetching the number of course:', error);
       });
 
     }

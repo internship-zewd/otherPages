@@ -1,6 +1,6 @@
 import React from 'react'
 import '../DashContent/DashContent.css'
-// import './AddEm.css'
+ import '../../css/Popup.css'
 import { Table } from 'react-bootstrap';
 import {ViewPopup} from './ViewPopup';
 import {UpdatePopup} from './UpdatePopup'
@@ -89,75 +89,99 @@ function AllCo() {
     }
   return (
     <div className="dashContent">
-        <div className="overview">
-                    <div className="title">
-                        <i className="uil uil-suitcase"></i>
-                         <span className="text">Course/All Courses</span>
-                       
-                        
-                    </div>
-                    <div className="content">
-   
-                   <div className="user-details">
-                   {/* <Filter data={data} setData={setData} />  */}
-                   <form>
-                 
-                    <div className='input-box'>
-                  
-                   <br/>
-                    <input type="text" placeholder="Search Course" onChange={(e) => { setSearch(e.target.value) }} name="search" value={search} />
-                    </div>
-                    </form>
-                    
-                    </div>
-                    </div>
+      <div className="overview">
+        <div className="title">
+          <i className="uil uil-suitcase"></i>
+          <span className="text">Course/All Courses</span>
+        </div>
+        <div className="content">
+          <div className="user-details">
+            {/* <Filter data={data} setData={setData} />  */}
+            <form>
+              <div className="input-box">
+                <br />
+                <input
+                  type="text"
+                  placeholder="Search Course"
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
+                  name="search"
+                  value={search}
+                />
+              </div>
+            </form>
+          </div>
+        </div>
 
-                    <Table striped bordered hover>
-                    <thead>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th> Course Id.</th>
+              <th>Course Name</th>
+              <th>Tuition Fee</th>
+              <th>Duration</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data
+              .filter((item) => {
+                return search.toLowerCase() === ""
+                  ? item
+                  : item.course_name.toLowerCase().includes(search);
+              })
+              .map((item, index) => (
+                <tr key={item.id}>
+                  <td>{item.id_tag}</td>
+                  <td>{item.course_name}</td>
+                  <td>{item.fee}</td>
+                  <td>{item.course_duration}</td>
 
-<tr>
-    <th> Course Id.</th>
-    <th>Course Name</th>
-    <th>Tuition Fee</th>
-    <th>Duration</th>
-    <th>Actions</th>
-</tr>
-</thead>
-<tbody>
+                  <button
+                    className="btn btn-primary btn-sm me-2"
+                    onClick={(e) => {
+                      handleView(e, item.id);
+                    }}
+                  >
+                    <VisibilityIcon />
+                  </button>
+                  <button
+                    className="btn btn-primary btn-sm me-2"
+                    onClick={(e) => {
+                      handleUpdate(e, item.id);
+                    }}
+                  >
+                    <EditIcon />
+                  </button>
 
-{ data.filter((item)=>{
-    return search.toLowerCase() === ''? item: 
-    item.course_name.toLowerCase().includes(search);
+                  <button
+                    className="btn btn-sm btn-danger"
+                    onClick={(e) => {
+                      handleDelete(e, item.id);
+                    }}
+                  >
+                    {" "}
+                    <DeleteIcon />
+                  </button>
+                </tr>
+              ))}
+          </tbody>
+        </Table>
+        <UpdatePopup
+          trigger={updatePopup}
+          setTrigger={setUpdatePopup}
+          updateProp={courseInfo}
+        />
 
-})
-.map((item,index)=> (
-    
-
-    <tr key={item.id}>
-        <td>{item.id}</td>
-        <td>{item.course_name}</td>
-        <td>{item.fee}</td>
-        <td>{item.course_duration}</td>
-        
-   <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleView(e, item.id)}}><VisibilityIcon/></button>
-   <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleUpdate(e, item.id)}}><EditIcon/></button>
-                 <UpdatePopup trigger={updatePopup} setTrigger={setUpdatePopup} updateProp={courseInfo}/>
-                                    
-                                   <ViewPopup trigger={buttonPopup} setTrigger={setButtonPopup} courseProp={courseInfo} />
-                                    
-   <button  className='btn btn-sm btn-danger' onClick={(e) => { handleDelete(e, item.id) }}> <DeleteIcon/></button>  
-    </tr>
-                        
-))}
-</tbody>
-                    </Table>
-
-                </div>
-
-
-               
-                </div>
-  )
+        <ViewPopup
+          trigger={buttonPopup}
+          setTrigger={setButtonPopup}
+          courseProp={courseInfo}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default AllCo

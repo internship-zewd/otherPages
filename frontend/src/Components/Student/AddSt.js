@@ -91,11 +91,11 @@ const handleCourse=(e)=>{
         if(paymentStatus===null){
             validationErrors.paymentStatus="Pick the student's payment status"
         }
-        if(!admissionDate.trim()){
-            validationErrors.admissionDate="Fill in student's admissionDate"
-        }else if(!validator.isDate(admissionDate)){
-            validationErrors.admissionDate="Enter a valid date"
-        }
+        // if(!admissionDate.trim()){
+        //     validationErrors.admissionDate="Fill in student's admissionDate"
+        // }else if(!validator.isDate(admissionDate)){
+        //     validationErrors.admissionDate="Enter a valid date"
+        // }
         if(course===null){
             validationErrors.course="Pick the course the student is enrolling to"
         }
@@ -104,17 +104,17 @@ const handleCourse=(e)=>{
         }
 
         if(!dob.trim()){
-            validationErrors.dob="Fill in student's date of birth"
+            validationErrors.dob="Fill in student's date of birth";
         }else if(!validator.isDate(dob)){
-            validationErrors="Enter a valid date"
+            validationErrors="Enter a valid date";
         }
-        if(transcript===null){
-            validationErrors.transcript="Attach student's transcript file"
-        }
+        // if(transcript===null){
+        //     validationErrors.transcript="Attach student's transcript file";
+        // }
       
         setErrors(validationErrors);
         if (Object.keys(validationErrors).length === 0) {
-            alert('Registered Successfully!')
+            alert('Registered Successfully!');
         }
         if (Object.keys(validationErrors).length === 0) {
         return await axios
@@ -227,7 +227,7 @@ const handleCourse=(e)=>{
                                     <div className="errors">{errors.dob}<br/></div>
                                 </div>
 
-                                <button className="btn btn-warning button"
+                                <button className="btn btn-warning btnForAll"
                                     type="submit"  onChange={handleSubmit}
 
                                 >Register</button>

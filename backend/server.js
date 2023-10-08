@@ -45,5 +45,3 @@ db.sequelize.sync({alter:true}).then((req)=>{
         console.log(`app is listening on ${PORT}`)
     })} 
 ) 
-
-

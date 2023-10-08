@@ -3,6 +3,7 @@
     padding: 10px 14px;
     display: flex;
     flex-direction: column;
+   
 }
 
 .top {
@@ -49,15 +50,15 @@
     outline: none;
 }
 
-.top .searchBox i {
-    position: absolute;
-    left: 15px;
+/* .top .searchBox i {
+    position: relative;
+    left: 80px;
     font-size: 22px;
     z-index: 10;
-    top: 50%;
+    top: 8%;
     transform: translateY(-50%);
     color: var(--text-color);
-}
+} */
 
 .top .toDo {
     font-size: 26px;

@@ -3,6 +3,7 @@
      padding: 10px 14px;
      display: flex;
      flex-direction: column;
+    
  }
 
  .top {
@@ -14,7 +15,7 @@
      height: 10%;
      padding: 10px 14px;
      background-color: var(--dark-color);
-     z-index: 10px;
+     z-index: 3;
  }
 
  .top .sidebarToggle {
@@ -53,7 +54,7 @@
      position: absolute;
      left: 15px;
      font-size: 22px;
-     z-index: 10;
+     z-index: 2;
      top: 50%;
      transform: translateY(-50%);
      color: var(--text-color);
@@ -135,6 +136,7 @@
  .dashContent {
      padding-top: 30px;
      overflow-y: scroll;
+     z-index: 3;
  }
 
 .dashContent .title {
