@@ -40,9 +40,9 @@ export const SpecificMessage=(props)=>{
         e.preventDefault()
         await axios.post(`http://localhost:8081/message/specific`,{emails,messageInfo,attachment})
         .then((res)=>{console.log(res)
-        window.alert("message sent successfully")})
+        alert("message sent successfully")})
         .catch((err)=>{if(err){console.log(err)
-        window.alert("dmessage is not sent")}})
+        alert("dmessage is not sent")}})
     }
 
 

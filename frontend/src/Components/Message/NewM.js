@@ -123,9 +123,9 @@ function NewM() {
         e.preventDefault()
         await axios.post(`http://localhost:8081/message/create/${type}`,{messageInfo,attachment})
         .then((res)=>{console.log(res)
-            window.alert("message sent successfully")})
+            alert("message sent successfully")})
             .catch((err)=>{if(err){console.log(err)
-            window.alert("dmessage is not sent")}})
+            alert("dmessage is not sent")}})
     }
 
     
@@ -161,6 +161,7 @@ function NewM() {
                                 <option value="" selected="selected">Select type</option>
                                 <option value="allEmployees">All employees</option>
                                 <option value="allMembers">All school members</option>
+                                <option value="allAdmins">All Admins</option>
                                 <option value="allInstructors">All Instructors</option>
                                 <option value="allStudents">All Students</option>
                                 <option value="allManagers">All Managers</option>
@@ -171,7 +172,7 @@ function NewM() {
 
                             <textarea rows="10" cols="80" placeholder="enter the message...." required onChange={(e)=>{handleChange(e)}} name="message"></textarea><br/>
                             <label for="attach">Attachment </label>
-                            <input id="attach" type="file" name="attachment" placeholder=".pdf,.exe,.txt,..." onChange={(e)=>{handleAttachment(e)}}/>
+                            <input id="attach" type="file" name="attachment" placeholder=".pdf,.exe,.txt,..." onChange={(e)=>{handleAttachment(e)}} />
 
                             <button type="submit" onSubmit={(e)=>handleSubmitAll(e)}>Send</button>
                             </form>
