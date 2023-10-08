@@ -7,7 +7,7 @@ const app= express();
 PORT=8081
 
 const corsOptions={
-    origin:'http://localhost:3001'
+    origin:'http://localhost:3000'
 }
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({extended:true}))
@@ -27,8 +27,17 @@ app.use('/admin',adminRoute)
 const courseRoute=require('./routes/course')
 app.use('/course',courseRoute)
 
+const accountantRoute=require("./routes/accountant")
+app.use('/accountant',accountantRoute)
+
+const managerRoute=require("./routes/manager")
+app.use('/manager',managerRoute)
+
 const classRoute=require("./routes/classs")
 app.use('/classs',classRoute)
+const messageRoute=require("./routes/message")
+app.use("/message", messageRoute)
+
 
 
 db.sequelize.sync({alter:true}).then((req)=>{
@@ -37,5 +46,4 @@ db.sequelize.sync({alter:true}).then((req)=>{
     })} 
 ) 
 
-// {alter:true}
 

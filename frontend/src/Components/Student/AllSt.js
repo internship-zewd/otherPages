@@ -18,16 +18,28 @@ function AllSt() {
     const [studentinfo, setStudentinfo] = useState({});
     const [updatePopup, setUpdatePopup] = useState(false);
     const [buttonPopup, setButtonPopup] = useState(false);
+    const [Class,setClass]=useState([])
 
     useEffect(() => {
         getStudent();
+        
 
     }, [])
 
-    const getStudent=async()=>{
+    const getClass=async()=>{
+    
+        await axios.get(`http://localhost:8081/classs/getAll`)
+        .then((res)=>{console.log(res)})
+        .catch((err)=>{if(err){console.log(err)}})
 
-      await axios.get('http://localhost:8081/student')
+
+    }
+
+    const getStudent=async()=>{
+      
+      await axios.get('http://localhost:8081/student/getAllAndClass')
       .then((res)=>{
+        getClass()
           console.log("this is all the studens"+res)
           setData(res.data)
           
@@ -39,7 +51,7 @@ function AllSt() {
   }
   const handleView=async(e,id)=>{
       // e.preventDefault();
-      return await axios.get(`http://localhost:8081/student/${id}`)
+      return await axios.get(`http://localhost:8081/student/getOne/${id}`)
       .then((response)=>{
   
           const viewData=response.data
@@ -61,7 +73,7 @@ function AllSt() {
   const handleUpdate=async(e,id)=>{
   
       // e.preventDefault(); 
-      await axios.get(`http://localhost:8081/student/${id}`)
+      await axios.get(`http://localhost:8081/student/update/${id}`)
       .then((response)=>{
           setStudentinfo(response.data)
           console.log(response.data)
@@ -80,7 +92,7 @@ function AllSt() {
   const handleDelete=async(e,id)=>{
       // e.preventDefault()
   
-  await axios.delete(`http://localhost:8081/student/${id}`)
+  await axios.delete(`http://localhost:8081/student/delete/${id}`)
   .then((res)=>{console.log("deleted"+ res)
   console.log(res)})
   
@@ -124,7 +136,7 @@ function AllSt() {
                             .map((item, index) => (
                                 <tr key={item.id}>
 
-                                    <td>{item.username}</td>
+                                    <td>{item.full_name}</td>
                                     <td>{item.email}</td>
                                     <td>{item.course}</td>
                                     <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleView(e, item.id)}}><VisibilityIcon/></button>

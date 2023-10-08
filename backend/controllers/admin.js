@@ -76,21 +76,20 @@ Mailer(email)
 
 const updateAdmin=async(req,res)=>{
     console.log("im in admin put")
-    const {firstName,middleName,lastName,email,password,phone,salary,date}=req.body
+    const {firstName,middleName,lastName,email,password,phone,salary,fullIdentification}=req.body;
+    const identification=fullIdentification.split(" ")
     const fullName=firstName+" "+middleName+" "+lastName
-    const previousId=await admin.max('id')
-    const idTagValue=previousId!==null?`ADM${1000+previousId}`:`ADM${1000}`
-    const fullIdentification=idTagValue+" "+fullName
+    const full_identification=identification[0]+" "+fullName
+
     await admin.update(
         {     
-        id_tag:idTagValue,
-        full_name:fullName,
-        full_identification:fullIdentification,
-        email:email,
-        password:password,
-        phone:phone,
-        salary:salary,
-        employment_date:date,
+            
+            full_name:fullName,
+            full_identification:full_identification,
+            email:email,
+            password:password,
+            phone:phone,
+            salary:salary,
         
         },
 

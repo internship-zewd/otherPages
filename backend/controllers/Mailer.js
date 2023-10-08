@@ -1,11 +1,8 @@
 const nodeMailer=require('nodemailer')
 require('dotenv').config()
 
-const html=`
- Hello world 
-Isnt nodemailer useful
-`
-function Mailer(email){
+function Mailer(email,title,message,attachment){
+    console.log(email)
    const transporter=nodeMailer.createTransport({
     service:'gmail',
     secure:true,
@@ -17,10 +14,17 @@ function Mailer(email){
 })
 
 const mailOptions={
-    from:`Jalal Addisu <jayaddisu@gmail.com>`,
+    from:`Zewd Academy <jayaddisu@gmail.com>`,
     to:email,
-    subject:"This sumn bout your email ehm",
-    text:html
+    subject:title,
+    text:message,
+    attachments:[
+        {
+            filename:attachment.originalname,
+            content:attachment.data,
+        
+        }
+    ],
 
 
 }
@@ -30,6 +34,7 @@ transporter.sendMail(mailOptions,function(error,info){
         console.log(error)}
     else(console.log("Message sent: " +info.reponse))
 })
+return("Mesage sent successfully")
 
 
 }

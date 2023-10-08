@@ -51,8 +51,8 @@ module.exports = (sequelize, DataTypes) => {
 
 })
 course.associate = (models) => {
-    course.hasMany(models.student, { foreignKey: 'course_id' });
-    course.hasMany(models.classs,{foreignKey:"course_id"})
+    course.hasMany(models.student, { foreignKey: 'course_id',onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+    course.hasMany(models.classs,{foreignKey:"course_id",onDelete: 'CASCADE', onUpdate: 'CASCADE'})
   };
 return course
 }

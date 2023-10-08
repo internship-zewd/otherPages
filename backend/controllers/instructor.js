@@ -59,13 +59,13 @@ const createInstructor=async (req,res)=>{
     const userEmail=req.body.email
     const {firstName,middleName,lastName,email,password,phone,salary,date}=req.body
     const previousId=await instructor.max('id');
-    const idTagValue=previousId!==null?`INS${1000+previousId}`:`INS${1000}`
+    const idTag=previousId!==null?`INS${1000+previousId}`:`INS${1000}`
     const fullName=firstName+" "+middleName+" "+lastName
-    const fullIdentification=idTagValue+" "+fullName
+    const fullIdentification=idTag+" "+fullName
        
     instructor.create({
 
-        id_tag:idTagValue,
+        id_tag:idTag,
         full_name:fullName,
         full_identification:fullIdentification,
         email:email,
@@ -86,19 +86,21 @@ const createInstructor=async (req,res)=>{
 }
 
 const updateInstructor=async (req,res)=>{
-    const {firstName,middleName,lastName,email,password,phone,salary,date}=req.body;
-    const previousId=await instructor.max('id');
-    const idTagValue=previousId!==null?`INS${1000+previousId}`:`INS${1000}`
+    const {firstName,middleName,lastName,email,password,phone,salary,fullIdentification}=req.body;
+    const identification=fullIdentification.split(" ")
     const fullName=firstName+" "+middleName+" "+lastName
-    const fullIdentification=idTagValue+" "+fullName
+    const full_identification=identification[0]+" "+fullName
+
+ 
+    
+
 
     
     instructor.update(
         {
-            
-        id_tag:idTagValue,
+
         full_name:fullName,
-        full_identification:fullIdentification,
+        full_identification:full_identification,
         email:email,
         password:password,
         phone:phone,
@@ -120,7 +122,7 @@ const updateInstructor=async (req,res)=>{
     
         const ins_id=req.params.id
         instructor.destroy({where:{id:ins_id}})       
-        .then(res.send())
+        .then((res)=>{console.log(res)})
         .catch((err)=>{
             if(err){
                 console.log(err)
@@ -135,7 +137,7 @@ module.exports={
     getOneInstructor,
     createInstructor,
     updateInstructor,
-    deleteInstructor
+    deleteInstructor,
 }
 
 

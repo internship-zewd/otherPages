@@ -1,4 +1,4 @@
-const {student}=require('../models')
+const {student,classs}=require('../models')
 
 const getAllStudent=(req,res)=>{
     student.findAll()
@@ -107,13 +107,25 @@ const deleteStudent=(req,res)=>{
         }
     })}
 
+
+    const getStudentAndClass=(req,res)=>{
+        let studentByClass=[]
+        student.findAll()
+        .then((student)=>{
+
+
+        })
+
+    }
+
 module.exports={
     getAllStudent,
     getOneStudent,
     createStudent,
     updateStudent,
     getStudentByClass,
-    deleteStudent
+    deleteStudent,
+    getStudentAndClass
 }
 
 

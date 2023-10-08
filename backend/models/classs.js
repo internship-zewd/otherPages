@@ -1,17 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const classs = sequelize.define( "classs",
+  const classs = sequelize.define('classs',
     {
-      instructor_id:{
-          type:DataTypes.INTEGER,
-          allowNull:false,
-
-      },
-      course_id:{
-          type:DataTypes.INTEGER,
-          allowNull:false,
-
-      },
-      
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -28,25 +17,28 @@ module.exports = (sequelize, DataTypes) => {
       full_identification: {
         type: DataTypes.STRING,
       },
-      
+      instructor_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      course_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
     },
     {
       freezeTableName: true,
-      tableName:"classs",
+      tableName: 'classs',
       timestamps: false,
     }
-    )
+  );
 
   classs.associate = (models) => {
-
-    classs.hasMany(models.student, { foreignKey: "class_id" });
-    classs.belongsTo(models.instructor, { foreignKey: "instructor_id" });
-    classs.belongsTo(models.course, { foreignKey: "course_id" });
-    classs.hasMany(models.attendance,{foreignKey:"class_id"})
-  }
-
-
-  
+    classs.hasMany(models.student, { foreignKey: 'class_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+    classs.belongsTo(models.instructor, { foreignKey: 'instructor_id', onDelete: 'SET NULL', onUpdate: 'CASCADE' });
+    classs.belongsTo(models.course, { foreignKey: 'course_id', onDelete: 'SET NULL', onUpdate: 'CASCADE' });
+    classs.hasMany(models.attendance, { foreignKey: 'class_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+  };
 
   return classs;
-}
+};

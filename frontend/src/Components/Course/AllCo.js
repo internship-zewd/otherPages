@@ -136,7 +136,7 @@ function AllCo() {
     <tr key={item.id}>
         <td>{item.id}</td>
         <td>{item.course_name}</td>
-        <td>{item.course_fee}</td>
+        <td>{item.fee}</td>
         <td>{item.course_duration}</td>
         
    <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleView(e, item.id)}}><VisibilityIcon/></button>

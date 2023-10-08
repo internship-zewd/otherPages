@@ -37,15 +37,20 @@ function AllEm() {
         
         const instructor=await axios.get('http://localhost:8081/instructor/getAll')
         const admin=await axios.get('http://localhost:8081/admin/getAll')
-        await axios.all([instructor,admin])
+        const manager=await axios.get('http://localhost:8081/manager/getAll')
+        const accountant=await axios.get('http://localhost:8081/accountant/getAll')
+
+        await axios.all([instructor,admin,manager,accountant])
         .then( 
            axios.spread((...allData)=>{
             const instructor=allData[0].data
             const admin=allData[1].data
+            const manager=allData[2].data
+            const accountant=allData[3].data
           console.log(admin)
          
          
-          const getEmployees=[instructor,admin]
+          const getEmployees=[instructor,admin,manager,accountant]
         
           console.log(getEmployees)           
                 const employees=[]
@@ -98,7 +103,7 @@ function AllEm() {
     const handleUpdate=async(e,id,employee)=>{
     
         
-        await axios.get(`http://localhost:8081/${employee}/update/${id}`)
+        await axios.get(`http://localhost:8081/${employee}/getOne/${id}`)
         .then((response)=>{
             setEmployeeInfo(response.data)
             console.log(response.data)
@@ -115,11 +120,13 @@ function AllEm() {
     
     }
     const handleDelete=async(e,id,employee)=>{
+        console.log(id)
 
-           
+           e.preventDefault()
     await axios.delete(`http://localhost:8081/${employee}/delete/${id}`)
     .then((res)=>{console.log("deleted"+ res)})
-    window.location.reload()
+    .catch((err)=>{if(err){console.log(err)}})
+    // window.location.reload()
     
     }
   return (

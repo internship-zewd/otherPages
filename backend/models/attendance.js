@@ -8,12 +8,10 @@ module.exports=(sequelize,DataTypes)=>{
         },
         class_id:{
             type:DataTypes.INTEGER,
-            allowNull:false,
 
         },
         student_id: {
             type:DataTypes.INTEGER,
-            allowNull:false,
 
         },
         idTagValue:{
@@ -43,9 +41,9 @@ module.exports=(sequelize,DataTypes)=>{
     }
     )
     attendance.associate=(models)=>{
-        attendance.belongsTo(models.student,{foreignKey:"student_id"})
-        attendance.belongsTo(models.classs,{foreignKey:"class_id"})
-        attendance.belongsTo(models.instructor,{foreignKey:"instructor_id"})
+        attendance.belongsTo(models.student,{foreignKey:"student_id",onDelete: 'SET NULL', onUpdate: 'CASCADE'})
+        attendance.belongsTo(models.classs,{foreignKey:"class_id",onDelete: 'SET NULL', onUpdate: 'CASCADE'})
+        attendance.belongsTo(models.instructor,{foreignKey:"instructor_id",onDelete: 'SET NULL', onUpdate: 'CASCADE'})
 
     }
 return attendance;

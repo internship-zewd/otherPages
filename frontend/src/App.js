@@ -4,6 +4,7 @@ import './App.css';
 import Sidebar from './layout/Sidebar/Sidebar';
 import Content from './layout/Content/Content';
 import ContentTop from './Components/ContentTop/ContentTop';
+import { SpecificMessage } from './Components/Message/SpecificMessage';
 
 import {
   BrowserRouter as Router,
@@ -20,7 +21,7 @@ function App() {
   return (
        <div className="full_content">
         <section>
-          
+                              
           
              <Sidebar sidebarClose={sidebarClose}  click={handleClick}/>
              <section className="dashboard">

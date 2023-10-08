@@ -21,7 +21,7 @@ export const UpdatePopup=(props)=>{
     const _password=updateProp.password
     const _phone=updateProp.phone
     const _salary=updateProp.salary
-    const employment_date=updateProp.employment_date
+    const full_identification=updateProp.full_identification
 
 
 
@@ -33,8 +33,8 @@ export const UpdatePopup=(props)=>{
     const [phone,setPhone]=useState("");
     const [password,setPassword]=useState("")
     const [salary,setSalary]=useState("");
-    const [date,setDate]=useState("");
     const [errors,setErrors]=useState({})
+    const [fullIdentification,setFullIdentification]=useState("")
     
 
     useEffect(()=>{
@@ -46,9 +46,9 @@ export const UpdatePopup=(props)=>{
         setPassword(_password)
         setPhone(_phone)
         setSalary(_salary)
-        setDate(employment_date)
+        setFullIdentification(full_identification)
 
-    },[employee_type,first_name,middle_name,last_name,_email,_phone,_salary,employment_date])
+    },[employee_type,first_name,middle_name,last_name,_email,_phone,_salary,full_identification,_password])
    
 // console.log(updateProp.id)
 
@@ -64,11 +64,12 @@ console.log(email+_email)
     if (employeeType===employee_type){
 
         console.log("im in here ")
-        await axios.put(`http://localhost:8081/${employee_type}/update/${id}`,{firstName,middleName,lastName,email,password,phone,salary,date} )
+        await axios.put(`http://localhost:8081/${employee_type}/update/${id}`,{firstName,middleName,lastName,email,password,phone,salary,fullIdentification} )
         .then((res)=>{
             console.log(res.data)
             setTrigger(false)
             console.log("we're in put router ")
+            window.location.reload()
         })
         .catch((err)=>{
             if(err){
@@ -79,11 +80,11 @@ console.log(email+_email)
         }
         else{
             console.log(employeeType)
-         await axios.post(`http://localhost:8081/${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary,date} )
+         await axios.post(`http://localhost:8081/${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary} )
     .then((res)=>{
 
         console.log(res.data)
-        setTrigger(false)
+       
         console.log("we're in post hshahaa")
         console.log(`the ${employee_type} id is ${id}`)
     })
@@ -93,9 +94,11 @@ console.log(email+_email)
         }
     })
     
-        await axios.delete(`http://localhost:8081/${updateProp.employee_type}/delete${id}`)
+        await axios.delete(`http://localhost:8081/${updateProp.employee_type}/delete/${id}`)
         .then((res)=>{
             console.log('removed successfully')
+            setTrigger(false)
+            window.location.reload()
         })
         .catch((err)=>{
             if(err){
@@ -104,7 +107,6 @@ console.log(email+_email)
         
         })
     }
-    
         
 }
    return(props.trigger)?(

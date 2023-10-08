@@ -83,9 +83,9 @@ module.exports = (sequelize, DataTypes) => {
 
 })
 student.associate = (models) => {
-    student.belongsTo(models.course, { foreignKey: 'course_id' ,as:'student_course'})
-    student.belongsTo(models.classs, {foreignKey:"class_id"})
-    student.hasMany(models.attendance,{foreignKey:"student_id"})
+    student.belongsTo(models.course, { foreignKey: 'course_id',onDelete: 'SET NULL', onUpdate: 'CASCADE'})
+    student.belongsTo(models.classs, {foreignKey:"class_id",onDelete: 'SET NULL', onUpdate: 'CASCADE'})
+    student.hasMany(models.attendance,{foreignKey:"student_id",onDelete: 'CASCADE', onUpdate: 'CASCADE'})
 
 
 

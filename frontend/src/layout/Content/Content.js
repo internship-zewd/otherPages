@@ -25,6 +25,7 @@ import Financial from '../../Components/Report/Financial';
 import Attendance from '../../Components/Report/Attendance';
 import ReportCard from '../../Components/Report/ReportCard';
 import NewM from '../../Components/Message/NewM';
+import {SpecificMessage} from '../../Components/Message/SpecificMessage';
 import Archive from '../../Components/Message/Archive';
 
 
@@ -45,8 +46,7 @@ function Content({click}) {
               <Route path={'/Student/All Students'}>
                 <AllSt/>
               </Route>
-  
-
+             
              <Route path={'/Employee/Add Employee'}>
                 <AddEm/>
               </Route>
@@ -96,6 +96,10 @@ function Content({click}) {
               </Route>
               <Route path={'/Message/Archives'}>
                 <Archive/>
+              </Route>
+
+              <Route exact path={'/Message/Specific'}>
+                <SpecificMessage/>
               </Route>
 
             </Switch> 
