@@ -1,0 +1,11 @@
+{
+  "name": "otherpages",
+  "version": "1.0.0",
+  "description": "a basic structure(frontend/css) for all the other pages(other than the sign-in).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
